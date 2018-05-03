@@ -4,13 +4,15 @@ const HtmlWebpackPlugin=require('html-webpack-plugin');
 const webpack=require('webpack');
 const path=require('path');
 const OpenBrowserPlugin=require('open-browser-webpack-plugin');
+const ExtractTextPlugin = require('extract-text-webpack-plugin');
 const ROOT_PATH = path.resolve(__dirname);
 const SRC_PATH = path.resolve(ROOT_PATH, 'src');
+
 const config={
 	mode: 'development',
 	entry:{index:['./src/index.js']},
 	output:{
-		filename:'bundle.js',
+		filename:'index.js',
 		path:path.join(__dirname, 'build')
 	},
 	module:{
@@ -26,6 +28,15 @@ const config={
 	                }
 	            }
 			},
+			{ 
+				test: /\.css$/,
+	            exclude: path.resolve(SRC_PATH, 'node_modules'),
+	            include: SRC_PATH,
+	            use: [
+	            	{ loader: 'css-loader'},
+	            	{ loader: 'style-loader'}
+	            ]
+			},
 		]
 	},
 	// optimization:{
@@ -36,8 +47,11 @@ const config={
     		template: './templates/index.html',
     		inject:'body'
     	}),
+    	new ExtractTextPlugin('style.css', {
+	      allChunks: true
+	    }),
     	new webpack.HotModuleReplacementPlugin(),
-    	new OpenBrowserPlugin({url: 'http://localhost:3000'})
+    	new OpenBrowserPlugin({url: 'http://localhost:8888'})
 	]
 }
 
