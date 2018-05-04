@@ -1,11 +1,12 @@
 import React, {Component} from 'react';
 import {Provider} from 'react-redux';
-import {createstore} from 'redux';
+import {createStore} from 'redux';
 import Routes from './routes/index.js';
-// let store=createstore();
+import rootReducer from './reducers/index.js';
+let store=createStore(rootReducer);
 class App extends Component{
 	render(){
-		return(<Provider>
+		return(<Provider store={store}>
 				<Routes/>
 			</Provider>)
 	}

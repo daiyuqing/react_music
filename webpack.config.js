@@ -9,6 +9,7 @@ const ROOT_PATH = path.resolve(__dirname);
 const SRC_PATH = path.resolve(ROOT_PATH, 'src');
 
 const config={
+	devtool: 'eval-source-map',
 	mode: 'development',
 	entry:{index:['./src/index.js']},
 	output:{
