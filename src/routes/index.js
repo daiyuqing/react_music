@@ -3,6 +3,7 @@ import { HashRouter, Route, hashHistory, Switch } from 'react-router-dom';
 import Home from '.././containers/Home/index.js';
 import Artist from '.././containers/Artist/index.js';
 import New from '.././containers/New/index.js';
+import Rank from '.././containers/Rank/index.js';
 const routes=()=>{
 	return <div>
 		<HashRouter history={hashHistory}>
@@ -10,6 +11,7 @@ const routes=()=>{
 			  <Route exact path='/' component={Home}/>
 			  <Route path='/artist' component={Artist}/>
 			  <Route path='/new' component={New}/>
+			  <Route path='/rank' component={Rank}/>
 			</Switch>
 		</HashRouter>
 	</div>

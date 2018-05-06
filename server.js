@@ -20,14 +20,34 @@ Object.assign(config, {
 var compiler = webpack(config);
 
 // 初始化一个webpack-dev-server
-new webpackDevServer(compiler, {
-    publicPath: config.output.publicPath,
-    historyApiFallback: false,
+new webpackDevServer(webpack(config), {
+    historyApiFallback: true, 
+    hot: true,
+    inline:true,
+    noInfo: false,
     stats: {
-      colors: true
+        colors: true,
+    },
+    proxy: {
+        '/kugou': {
+            target: 'http://m.kugou.com/',
+            changeOrigin:true,
+            pathRewrite: {"^/kugou" : ""}
+        },
+        "/yy_kugou": {
+            target: "http://www.kugou.com/yy/",
+            changeOrigin: true,
+            pathRewrite: {"^/yy_kugou" : ""}
+        },
+        "/mobilecdn": {
+            target: "http://mobilecdn.kugou.com",
+            changeOrigin: true,
+            pathRewrite: {"^/mobilecdn" : ""}
+        }
     }
-  }).listen(8888, 'localhost', function (error) {
-  if (error) {
-    console.error(error);
-  }
+}).listen(8888, 'localhost', function(err) {
+    if (err) {
+        console.log(err);
+    }
+    console.log('Listening at localhost:8888');
 });

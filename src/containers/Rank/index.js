@@ -1,24 +1,24 @@
 import React, {Component} from 'react';
 import { connect } from 'react-redux';
 import { bindActionCreators } from 'redux';
-import * as actions from '../.././actions/artist.js';
+import * as actions from '../.././actions/home.js';
 import Header from '../.././components/common/Header.js';
 import Nav from '../.././components/common/Nav.js';
-class Artist extends Component{
+class Rank extends Component{
 	render(){
 		let list=this.props.list;
 		return(<div>
 				<Header/>
-				<Nav page='artist'/>
-				<p>artist</p>
+				<Nav page='rank'/>
+				<p>Rank</p>
 			</div>)
 	}
 }
 
 
 export default connect(
-  (state)=>state.Artist,
+  (state)=>state.Rank,
     (dispatch)=>({
         actions:bindActionCreators(actions, dispatch)
     })
-)(Artist);
+)(Rank);

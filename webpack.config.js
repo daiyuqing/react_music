@@ -34,15 +34,37 @@ const config={
 	            exclude: path.resolve(SRC_PATH, 'node_modules'),
 	            include: SRC_PATH,
 	            use: [
-	            	{ loader: 'css-loader'},
-	            	{ loader: 'style-loader'}
+	            	{ loader: 'style-loader'},
+	            	{ loader: 'css-loader'}
 	            ]
 			},
+			{ 
+				test: /\.scss$/,
+	            exclude: path.resolve(SRC_PATH, 'node_modules'),
+	            include: SRC_PATH,
+	            use: [
+	            	{ loader: 'css-loader'},
+	            	{ loader: 'sass-loader'}
+	            ]
+			},
+			{ 
+				test: /\.(png|jpg|gif)$/,
+	            exclude: path.resolve(SRC_PATH, 'node_modules'),
+	            include: SRC_PATH,
+	            use:{
+	            	loader:'file-loader'
+	            } 
+			},
+			{ 
+				test: /\.(woff|woff2|svg|ttf|eot)($|\?)/i,
+	            exclude: path.resolve(SRC_PATH, 'node_modules'),
+	            include: SRC_PATH,
+	            use:{
+	            	loader:'url-loader'
+	            } 
+			}
 		]
 	},
-	// optimization:{
-	// 	minimize:true
-	// },
 	plugins:[
     	new HtmlWebpackPlugin({
     		template: './templates/index.html',
