@@ -4,6 +4,7 @@ import Home from '.././containers/Home/index.js';
 import Artist from '.././containers/Artist/index.js';
 import New from '.././containers/New/index.js';
 import Rank from '.././containers/Rank/index.js';
+import AlbumList from '.././components/Home/AlbumList.js';
 const routes=()=>{
 	return <div>
 		<HashRouter history={hashHistory}>
@@ -12,6 +13,7 @@ const routes=()=>{
 			  <Route path='/artist' component={Artist}/>
 			  <Route path='/new' component={New}/>
 			  <Route path='/rank' component={Rank}/>
+			  <Route path='/albumList' component={AlbumList}/>
 			</Switch>
 		</HashRouter>
 	</div>

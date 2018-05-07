@@ -1,9 +1,10 @@
+
 import React, { Component } from 'react';
 import {Link} from 'react-router-dom';
-import right_arrow  from '../.././static/images/right_arrow.png';
+import back  from '../.././static/images/back.png';
 import music  from '../.././static/images/music.png';
 
-class Recommend extends Component{
+class AlbumList extends Component{
     constructor(){
         super();
         this.state={
@@ -43,14 +44,12 @@ class Recommend extends Component{
     render() {
         return (
             <div style={{width:'10rem'}}>
-                <img src='http://imge.kugou.com/mobilebanner/20180504/20180504194725336580.jpg' style={{height:'4rem',width:'10rem',display:'block'}}/>
-                <div style={{width:'9.5rem',height:'1.2rem',display:'flex',justifyContent:'space-between',alignItems:'center',borderBottom:'0.02rem solid #cccccc',margin:'0 0.25rem',boxSizing:'border-box'}}>
-                    <span style={{color:'#666666',fontSize:'0.4rem'}}>推荐歌单</span>
-                    <Link to='/albumList'><img src={right_arrow} style={{height:'0.4rem',width:'0.4rem'}}/></Link>
+                <div style={{width:'10rem',height:'1.3rem',display:'flex',alignItems:'center',background:'#e9203d',boxSizing:'border-box'}}>
+                    <Link to='/'><img src={back} style={{height:'0.5rem',width:'0.5rem',marginLeft:'0.3rem'}}/></Link>
+                    <span style={{color:'#fff',fontSize:'0.4rem',marginLeft:'3.4rem'}}>精选歌单</span>
                 </div>
-                <div style={{width:'10rem',display:'flex',flexWrap:'wrap'}}>
+                <div style={{width:'10rem',display:'flex',flexWrap:'wrap',paddingBottom:'0.5rem'}}>
                     {this.state.plist.map((item,index)=>{
-                        if (index>8) {return}
                         let url=item.imgurl.replace('/{size}','');
                         let count=item.playcount/10000 ;
                         return (<div key={item.specialid} style={{width:'3rem',marginLeft:'0.25rem',marginTop:'0.25rem',position:'relative'}}>
@@ -70,4 +69,4 @@ class Recommend extends Component{
 const styles={
     
 }
-export default Recommend;
+export default AlbumList;
