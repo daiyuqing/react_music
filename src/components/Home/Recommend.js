@@ -2,45 +2,12 @@ import React, { Component } from 'react';
 import {Link} from 'react-router-dom';
 import right_arrow  from '../.././static/images/right_arrow.png';
 import music  from '../.././static/images/music.png';
-
+import Loading from '../.././components/common/Loading.js';
 class Recommend extends Component{
-    constructor(){
-        super();
-        this.state={
-            banner:[],
-            new_song:[],
-            plist:[]
-        }
-    }
-    componentWillMount(){
-        try{
-
-            fetch('/kugou/?json=true').then( (res) => res.json()).then(
-                (result)=>{
-                    console.log(result);
-                    this.setState({
-                        banner:result.banner,
-                        new_song:result.data
-                    });
-                },(error)=>{
-                    console.log(error);
-                }
-            );
-            fetch('/kugou/plist/index&json=true').then( (res) => res.json()).then(
-                (result)=>{
-                    console.log(result);
-                    this.setState({
-                        plist:result.plist.list.info
-                    });
-                },(error)=>{
-                    console.log(error);
-                }
-            );
-        }catch(e){
-            
-        }
-    }
     render() {
+        if (this.props.plist.length==0) {
+            return <Loading/>
+        }
         return (
             <div style={{width:'10rem'}}>
                 <img src='http://imge.kugou.com/mobilebanner/20180504/20180504194725336580.jpg' style={{height:'4rem',width:'10rem',display:'block'}}/>
@@ -49,7 +16,7 @@ class Recommend extends Component{
                     <Link to='/albumList'><img src={right_arrow} style={{height:'0.4rem',width:'0.4rem'}}/></Link>
                 </div>
                 <div style={{width:'10rem',display:'flex',flexWrap:'wrap'}}>
-                    {this.state.plist.map((item,index)=>{
+                    {this.props.plist.map((item,index)=>{
                         if (index>8) {return}
                         let url=item.imgurl.replace('/{size}','');
                         let count=item.playcount/10000 ;

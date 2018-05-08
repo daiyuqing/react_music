@@ -5,6 +5,7 @@ import * as actions from '../.././actions/artist.js';
 import Header from '../.././components/common/Header.js';
 import Nav from '../.././components/common/Nav.js';
 import right_arrow  from '../.././static/images/right_arrow.png';
+import Loading from '../.././components/common/Loading.js';
 class Artist extends Component{
 	constructor(){
         super();
@@ -29,11 +30,11 @@ class Artist extends Component{
         }
     }
 	render(){
-		let list=this.props.list;
-		return(<div>
-				<Header/>
-				<Nav page='artist'/>
-				<div style={{width:'10rem',padding:'0.3rem'}}>
+		let content=null;
+        if (this.state.singerClass.length==0) {
+            content=(<Loading/>) ;
+        }else{
+            content=(<div style={{width:'10rem',padding:'0.3rem'}}>
 					{this.state.singerClass.map((item,index)=>{
 						let marginBottom;
 						if (index%3==0) {
@@ -46,7 +47,12 @@ class Artist extends Component{
 							<img src={right_arrow} alt="" style={{width:'0.3rem',height:'0.3rem'}}/>
 						</div>)
 					})}
-				</div>
+				</div>);
+        }
+		return(<div>
+				<Header/>
+				<Nav page='artist'/>
+				{content}
 			</div>)
 	}
 }

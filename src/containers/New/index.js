@@ -6,6 +6,7 @@ import Header from '../.././components/common/Header.js';
 import Nav from '../.././components/common/Nav.js';
 import heart_1  from '../.././static/images/heart_1.png';
 import heart_2  from '../.././static/images/heart_2.png';
+import Loading from '../.././components/common/Loading.js';
 class New extends Component{
 	constructor(){
         super();
@@ -58,23 +59,27 @@ class New extends Component{
 		});
     }
 	render(){
-		return(<div>
-				<Header/>
-				<Nav page='new'/>
-				<div style={{width:'10rem'}}>
-				<div style={{width:'10rem',padding:'0.25rem'}}>
+        let content=null;
+        if (this.state.new_song.length==0) {
+            content=(<Loading/>) ;
+        }else{
+            content=(<div style={{width:'10rem',padding:'0.25rem'}}>
                     {this.state.new_song.map((item,index)=>{
-                    	let url=heart_1;
-                    	if (item.collected) {
-                    		url=heart_2;
-                    	}
+                        let url=heart_1;
+                        if (item.collected) {
+                            url=heart_2;
+                        }
                         return (<div  key={item.audio_id} style={{width:'9.5rem',display:'flex',alignItems:'center',justifyContent:'space-between',borderBottom:'0.01rem solid #cccccc',padding:'0.4rem 0'}}>
                             <p style={{color:'#666666',fontSize:'0.4rem',width:'8rem',lineHeight:'0.5rem'}}>{item.filename}</p>
                             <img src={url} onClick={this.collect.bind(this,item.audio_id,index)} style={{height:'0.4rem',width:'0.4rem'}}/>
                         </div>)
                     })}
-				</div>
-                </div>
+                </div>);
+        }
+		return(<div>
+				<Header/>
+				<Nav page='new'/>
+				{content}
 			</div>)
 	}
 }

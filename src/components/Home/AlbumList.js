@@ -1,46 +1,16 @@
 
 import React, { Component } from 'react';
 import {Link} from 'react-router-dom';
+import { connect } from 'react-redux';
+import { bindActionCreators } from 'redux';
 import back  from '../.././static/images/back.png';
 import music  from '../.././static/images/music.png';
-
+import * as actions from '../.././actions/home.js';
 class AlbumList extends Component{
     constructor(){
         super();
-        this.state={
-            banner:[],
-            new_song:[],
-            plist:[]
-        }
     }
-    componentWillMount(){
-        try{
-
-            fetch('/kugou/?json=true').then( (res) => res.json()).then(
-                (result)=>{
-                    console.log(result);
-                    this.setState({
-                        banner:result.banner,
-                        new_song:result.data
-                    });
-                },(error)=>{
-                    console.log(error);
-                }
-            );
-            fetch('/kugou/plist/index&json=true').then( (res) => res.json()).then(
-                (result)=>{
-                    console.log(result);
-                    this.setState({
-                        plist:result.plist.list.info
-                    });
-                },(error)=>{
-                    console.log(error);
-                }
-            );
-        }catch(e){
-            
-        }
-    }
+   
     render() {
         return (
             <div style={{width:'10rem'}}>
@@ -49,7 +19,7 @@ class AlbumList extends Component{
                     <span style={{color:'#fff',fontSize:'0.4rem',marginLeft:'3.4rem'}}>精选歌单</span>
                 </div>
                 <div style={{width:'10rem',display:'flex',flexWrap:'wrap',paddingBottom:'0.5rem'}}>
-                    {this.state.plist.map((item,index)=>{
+                    {this.props.plist.map((item,index)=>{
                         let url=item.imgurl.replace('/{size}','');
                         let count=item.playcount/10000 ;
                         return (<div key={item.specialid} style={{width:'3rem',marginLeft:'0.25rem',marginTop:'0.25rem',position:'relative'}}>
@@ -69,4 +39,10 @@ class AlbumList extends Component{
 const styles={
     
 }
-export default AlbumList;
+// export default AlbumList;
+export default connect(
+    (state)=>state.Home,
+    (dispatch)=>({
+        actions:bindActionCreators(actions, dispatch)
+    })
+)(AlbumList);

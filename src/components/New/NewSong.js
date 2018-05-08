@@ -1,20 +1,17 @@
 
 import React, { Component } from 'react';
 import right_arrow  from '../.././static/images/right_arrow.png';
-
+import Loading from '../.././components/common/Loading.js';
 
 class NewSong extends Component{
     constructor(){
         super();
         this.state={
-            banner:[],
-            new_song:[],
-            plist:[]
+            new_song:[]
         }
     }
     componentWillMount(){
         try{
-
             fetch('/kugou/?json=true').then( (res) => res.json()).then(
                 (result)=>{
                     console.log(result);
@@ -26,21 +23,14 @@ class NewSong extends Component{
                     console.log(error);
                 }
             );
-            fetch('/kugou/plist/index&json=true').then( (res) => res.json()).then(
-                (result)=>{
-                    console.log(result);
-                    this.setState({
-                        plist:result.plist.list.info
-                    });
-                },(error)=>{
-                    console.log(error);
-                }
-            );
         }catch(e){
             
         }
     }
     render() {
+    	if (this.state.plist.length==0) {
+            return <Loading/>
+        }
         return (
             <div style={{width:'10rem'}}>
                 <img src='http://imge.kugou.com/mobilebanner/20180504/20180504194725336580.jpg' style={{height:'4rem',width:'10rem',display:'block'}}/>

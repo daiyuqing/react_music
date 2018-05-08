@@ -5,6 +5,7 @@ import * as actions from '../.././actions/home.js';
 import Header from '../.././components/common/Header.js';
 import Nav from '../.././components/common/Nav.js';
 import right_arrow  from '../.././static/images/right_arrow.png';
+import Loading from '../.././components/common/Loading.js';
 class Rank extends Component{
 	constructor(){
         super();
@@ -29,11 +30,11 @@ class Rank extends Component{
         }
     }
 	render(){
-		let list=this.props.list;
-		return(<div>
-				<Header/>
-				<Nav page='rank'/>
-				<div style={{width:'10rem',padding:'0 0.3rem'}}>
+		let content=null;
+		if (this.state.rankData.length==0) {
+            content=(<Loading/>);
+        }else{
+        	content=(<div style={{width:'10rem',padding:'0 0.3rem'}}>
 					{this.state.rankData.map((item,index)=>{
 						let url=item.imgurl.replace('/{size}','');
 						return (<div key={item.rankid} style={{display:'flex',alignItems:'center',height:'3rem',width:'9.4rem',borderBottom:'0.02rem solid #ccc'}}>
@@ -42,7 +43,12 @@ class Rank extends Component{
 							<img src={right_arrow} alt="" style={{width:'0.5rem',height:'0.5rem'}}/>
 						</div>)
 					})}
-				</div>
+				</div>);
+        }
+		return(<div>
+				<Header/>
+				<Nav page='rank'/>
+				{content}
 			</div>)
 	}
 }

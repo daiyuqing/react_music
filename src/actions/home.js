@@ -1,9 +1,31 @@
-export function update(rsp){
+export function update_new_song(rsp){
 	return (dispatch,getState)=>{
 		dispatch({
-			type:'Add',
+			type:'UPDATE_NEW_SONG',
 			data:{
-				list:[1,2,3]
+				new_song:rsp
+			}
+		});
+	}
+}
+
+export function update_banner(rsp){
+	return (dispatch,getState)=>{
+		dispatch({
+			type:'UPDATE_BANNER',
+			data:{
+				banner:rsp
+			}
+		});
+	}
+}
+
+export function update_plist(rsp){
+	return (dispatch,getState)=>{
+		dispatch({
+			type:'UPDATE_PLIST',
+			data:{
+				plist:rsp
 			}
 		});
 	}
