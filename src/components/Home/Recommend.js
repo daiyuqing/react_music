@@ -8,6 +8,7 @@ class Recommend extends Component{
         if (this.props.plist.length==0) {
             return <Loading/>
         }
+        console.log(this.props.plist);
         return (
             <div style={{width:'10rem'}}>
                 <img src='http://imge.kugou.com/mobilebanner/20180504/20180504194725336580.jpg' style={{height:'4rem',width:'10rem',display:'block'}}/>
@@ -20,14 +21,18 @@ class Recommend extends Component{
                         if (index>8) {return}
                         let url=item.imgurl.replace('/{size}','');
                         let count=item.playcount/10000 ;
+                        let path='/album/'+item.specialid;
                         return (<div key={item.specialid} style={{width:'3rem',marginLeft:'0.25rem',marginTop:'0.25rem',position:'relative'}}>
-                            <img src={url} style={{height:'3rem',width:'3rem'}}/>
-                            <p style={{color:'#666666',fontSize:'0.3rem'}}>{item.specialname}</p>
-                            <div style={{color:'#fff',fontSize:'0.3rem',position:'absolute',top:'0.1rem',right:'0.1rem',alignItems:'center',display:'flex'}}>
-                                <img src={music} style={{height:'0.3rem',width:'0.3rem'}}/>
-                                <p style={{color:'#fff',fontSize:'0.3rem',marginLeft:'0.1rem'}}>{count.toFixed(2)}万</p>
+                            <Link to={path}>
+                                <img src={url} style={{height:'3rem',width:'3rem'}}/>
+                                <p style={{color:'#666666',fontSize:'0.3rem'}}>{item.specialname}</p>
+                                <div style={{color:'#fff',fontSize:'0.3rem',position:'absolute',top:'0.1rem',right:'0.1rem',alignItems:'center',display:'flex'}}>
+                                    <img src={music} style={{height:'0.3rem',width:'0.3rem'}}/>
+                                    <p style={{color:'#fff',fontSize:'0.3rem',marginLeft:'0.1rem'}}>{count.toFixed(2)}万</p>
+                                </div>
+                            </Link>
                             </div>
-                        </div>)
+                        )
                     })}
                 </div>
             </div>
