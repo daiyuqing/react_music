@@ -1,12 +1,11 @@
 import React, {Component} from 'react';
 import { connect } from 'react-redux';
 import { bindActionCreators } from 'redux';
-import * as actions from '../.././actions/home.js';
+import * as actions from '../.././actions/music.js';
 import Header from '../.././components/common/Header.js';
 import Nav from '../.././components/common/Nav.js';
-import heart_1  from '../.././static/images/heart_1.png';
-import heart_2  from '../.././static/images/heart_2.png';
 import Loading from '../.././components/common/Loading.js';
+import {IsEmpty} from '../.././util/tools.js';
 class New extends Component{
 	constructor(){
         super();
@@ -14,31 +13,7 @@ class New extends Component{
             new_song:[]
         }
     }
-    componentWillMount(){
-    	try{
-            fetch('/kugou/?json=true').then( (res) => res.json()).then(
-                (result)=>{
-                    console.log(result);
-                    let collection=localStorage.getItem('collection');
-                    let new_song=result.data;
-                    if (collection) {
-                    	for(let i in new_song){
-                    		if (collection.indexOf(new_song[i].audio_id)>-1) {
-                    			new_song[i].collected=true;
-                    		}
-                    	}
-                    }
-                    this.setState({
-                        new_song:result.data
-                    });
-                },(error)=>{
-                    console.log(error);
-                }
-            );
-        }catch(e){
-            
-        }
-    }
+    
     collect(id,i){
 		let collection=localStorage.getItem('collection');
 		if (collection) {
@@ -53,25 +28,23 @@ class New extends Component{
 		}else{
 			localStorage.setItem('collection',id);
 		}
-		this.state.new_song[i].collected=!this.state.new_song[i].collected;
-		this.setState({
-			new_song:this.state.new_song
-		});
+		this.props.new_song[i].collected=!this.props.new_song[i].collected;
+		this.props.actions.update_new_song(this.props.new_song);
     }
 	render(){
         let content=null;
-        if (this.state.new_song.length==0) {
+        if (IsEmpty(this.props.new_song)) {
             content=(<Loading/>) ;
         }else{
             content=(<div style={{width:'10rem',padding:'0.25rem'}}>
-                    {this.state.new_song.map((item,index)=>{
-                        let url=heart_1;
+                    {this.props.new_song.map((item,index)=>{
+                        let heart=<i onClick={this.collect.bind(this,item.audio_id,index)} className="iconfont icon-heart" style={{fontSize:'0.5rem',color:'#666666'}}></i>;
                         if (item.collected) {
-                            url=heart_2;
+                            heart=<i onClick={this.collect.bind(this,item.audio_id,index)} className="iconfont icon-heart" style={{fontSize:'0.5rem',color:'#666666'}}></i>;
                         }
                         return (<div  key={item.audio_id} style={{width:'9.5rem',display:'flex',alignItems:'center',justifyContent:'space-between',borderBottom:'0.01rem solid #cccccc',padding:'0.4rem 0'}}>
                             <p style={{color:'#666666',fontSize:'0.4rem',width:'8rem',lineHeight:'0.5rem'}}>{item.filename}</p>
-                            <img src={url} onClick={this.collect.bind(this,item.audio_id,index)} style={{height:'0.4rem',width:'0.4rem'}}/>
+                            {heart}
                         </div>)
                     })}
                 </div>);
@@ -86,7 +59,7 @@ class New extends Component{
 
 
 export default connect(
-  (state)=>state.New,
+  (state)=>state.Music,
     (dispatch)=>({
         actions:bindActionCreators(actions, dispatch)
     })

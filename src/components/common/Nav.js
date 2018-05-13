@@ -4,18 +4,26 @@ import {Link} from 'react-router-dom';
 class Nav extends Component{
 	render(){
 		return(<ul style={styles.nav}>
-            	<ol style={this.props.page=='home'?styles.nav_item_active:styles.nav_item_inactive}>
-            		<Link to='/'>个性推荐</Link>
-            	</ol>
-            	<ol style={this.props.page=='new'?styles.nav_item_active:styles.nav_item_inactive}>
-            		<Link to='/new'>新歌</Link>
-            	</ol>
-            	<ol style={this.props.page=='rank'?styles.nav_item_active:styles.nav_item_inactive}>
-            		<Link to='/rank'>排行榜</Link>
-            	</ol>
-            	<ol style={this.props.page=='artist'?styles.nav_item_active:styles.nav_item_inactive}>
-            		<Link to='/artist'>歌手</Link>
-            	</ol>
+            	<Link to='/'>
+	            	<ol style={this.props.page=='home'?styles.nav_item_active:styles.nav_item_inactive}>
+	            		个性推荐
+	            	</ol>
+            	</Link>
+            	<Link to='/new'>
+	            	<ol style={this.props.page=='new'?styles.nav_item_active:styles.nav_item_inactive}>
+	            		新歌
+	            	</ol>
+            	</Link>
+            	<Link to='/rank'>
+	            	<ol style={this.props.page=='rank'?styles.nav_item_active:styles.nav_item_inactive}>
+	            		排行榜
+	            	</ol>
+            	</Link>
+            	<Link to='/artist'>
+	            	<ol style={this.props.page=='artist'?styles.nav_item_active:styles.nav_item_inactive}>
+	            		歌手
+	            	</ol>
+            	</Link>
             </ul>
         )
 	}

@@ -1,7 +1,7 @@
 
 'use strict';
 
-import * as actions from '.././actions/home.js';
+
 
 const initState = {
     list:[1]

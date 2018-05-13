@@ -1,20 +1,18 @@
 import React, { Component } from 'react';
 import {Link} from 'react-router-dom';
-import right_arrow  from '../.././static/images/right_arrow.png';
-import music  from '../.././static/images/music.png';
 import Loading from '../.././components/common/Loading.js';
+import {IsEmpty} from '../.././util/tools.js';
 class Recommend extends Component{
     render() {
-        if (this.props.plist.length==0) {
+        if (IsEmpty(this.props.plist)) {
             return <Loading/>
         }
-        console.log(this.props.plist);
         return (
             <div style={{width:'10rem'}}>
                 <img src='http://imge.kugou.com/mobilebanner/20180504/20180504194725336580.jpg' style={{height:'4rem',width:'10rem',display:'block'}}/>
                 <div style={{width:'9.5rem',height:'1.2rem',display:'flex',justifyContent:'space-between',alignItems:'center',borderBottom:'0.02rem solid #cccccc',margin:'0 0.25rem',boxSizing:'border-box'}}>
                     <span style={{color:'#666666',fontSize:'0.4rem'}}>推荐歌单</span>
-                    <Link to='/albumList'><img src={right_arrow} style={{height:'0.4rem',width:'0.4rem'}}/></Link>
+                    <Link to='/albumList'><i className="iconfont icon-previewright" style={{fontSize:'0.5rem',color:'#666666'}}></i></Link>
                 </div>
                 <div style={{width:'10rem',display:'flex',flexWrap:'wrap'}}>
                     {this.props.plist.map((item,index)=>{
@@ -27,7 +25,7 @@ class Recommend extends Component{
                                 <img src={url} style={{height:'3rem',width:'3rem'}}/>
                                 <p style={{color:'#666666',fontSize:'0.3rem'}}>{item.specialname}</p>
                                 <div style={{color:'#fff',fontSize:'0.3rem',position:'absolute',top:'0.1rem',right:'0.1rem',alignItems:'center',display:'flex'}}>
-                                    <img src={music} style={{height:'0.3rem',width:'0.3rem'}}/>
+                                    <i className="iconfont icon-listen" style={{fontSize:'0.3rem',color:'#fff'}}></i>
                                     <p style={{color:'#fff',fontSize:'0.3rem',marginLeft:'0.1rem'}}>{count.toFixed(2)}万</p>
                                 </div>
                             </Link>

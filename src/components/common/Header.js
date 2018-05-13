@@ -1,13 +1,12 @@
 
 import React,{Component} from 'react';
-import userImg  from '../.././static/images/user.png';
-import searchImg  from '../.././static/images/search.png';
+
 class Header extends Component{
 	render(){
 		return(<div style={styles.header}>
-                <img src={userImg} style={styles.img}/>
+                <i className="iconfont icon-user-round-circle-o" style={{fontSize:'0.8rem',color:'#fff'}}></i>
                 <div style={styles.input_box}>
-                	<img src={searchImg} style={styles.search_icon}/>
+                	<i className="iconfont icon-search" style={{fontSize:'0.5rem',color:'#aaa',marginLeft:'0.2rem'}}></i>
 	                <input placeholder='请输入关键字' style={styles.input}/>
                 </div>
                 <div style={styles.music}>
@@ -48,6 +47,7 @@ const styles={
 		height:'0.8rem',
 		border:'none',
 		fontSize:'30px',
+		marginLeft:'0.3rem'
 	},
 	search_icon:{
 		width:'0.5rem',

@@ -30,3 +30,14 @@ export function update_plist(rsp){
 		});
 	}
 }
+
+export function update_album(rsp){
+	return (dispatch,getState)=>{
+		dispatch({
+			type:'UPDATE_ALBUM',
+			data:{
+				album:rsp
+			}
+		});
+	}
+}
