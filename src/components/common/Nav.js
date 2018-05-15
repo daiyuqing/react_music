@@ -40,7 +40,7 @@ const styles={
 		width:'1.6rem',
 		height:'1.1rem',
 		lineHeight:'1.1rem',
-		fontSize:'30px',
+		fontSize:'0.4rem',
 		textAlign:'center',
 		color:'#333333',
 		padding:'0 0.2rem'
@@ -49,7 +49,7 @@ const styles={
 		width:'1.6rem',
 		height:'1.1rem',
 		lineHeight:'1.1rem',
-		fontSize:'30px',
+		fontSize:'0.4rem',
 		textAlign:'center',
 		color:'#e9203d',
 		borderBottom:'0.05rem solid #e9203d',

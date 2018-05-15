@@ -46,7 +46,7 @@ const styles={
 		width:'5rem',
 		height:'0.8rem',
 		border:'none',
-		fontSize:'30px',
+		fontSize:'0.4rem',
 		marginLeft:'0.3rem'
 	},
 	search_icon:{

@@ -28,14 +28,15 @@ export default (state=initState,action)=>{
                 plist: action.data.plist
               });
 			break;
-		case 'UPDATE_PLAY_LIST':
-			return Object.assign({},state,{
-                play_list: action.data.play_list
-              });
-			break;
 		case 'UPDATE_ALBUM':
 			return Object.assign({},state,{
                 album: action.data.album
+              });
+			break;
+		case 'ADD_SONG':
+		console.log(action.data.play_list);
+			return Object.assign({},state,{
+                play_list: action.data.play_list
               });
 			break;
 		default:

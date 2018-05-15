@@ -25,7 +25,7 @@ class Home extends Component{
                     }
 					this.props.actions.update_new_song(new_song);
 					this.props.actions.update_banner(result.banner);
-                    fetch('/kugou/plist/index&json=true').then( (res) => res.json()).then(
+                    fetch('/kugou/plist/index?json=true').then( (res) => res.json()).then(
                         (result)=>{
                             this.props.actions.update_plist(result.plist.list.info);
                         },(error)=>{

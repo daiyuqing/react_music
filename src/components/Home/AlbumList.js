@@ -16,10 +16,13 @@ class AlbumList extends Component{
     }
    
     render() {
+        console.log(this.props)
         return (
             <div style={{width:'10rem'}}>
                 <div style={{width:'10rem',height:'1.3rem',display:'flex',alignItems:'center',background:'#e9203d',boxSizing:'border-box'}}>
-                    <Link to='/'><i className="iconfont icon-left" style={{fontSize:'0.5rem',color:'#fff',marginLeft:'0.2rem'}}></i></Link>
+                    <Link to='/'>
+                        <i className="iconfont icon-left" style={{fontSize:'0.5rem',color:'#fff',marginLeft:'0.2rem'}}></i>
+                    </Link>
                     <span style={{color:'#fff',fontSize:'0.4rem',marginLeft:'3.4rem'}}>精选歌单</span>
                 </div>
                 <div style={{width:'10rem',display:'flex',flexWrap:'wrap',paddingBottom:'0.5rem'}}>
@@ -47,7 +50,7 @@ const styles={
 }
 
 export default connect(
-    (state)=>state.Home,
+    (state)=>state.Music,
     (dispatch)=>({
         actions:bindActionCreators(actions, dispatch)
     })

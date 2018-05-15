@@ -55,10 +55,10 @@ class Album extends Component{
         });
     }
     playAll(){
-        
+        this.props.actions.add_song(this.props.album.list.list.info);
     }
     render() {
-        console.log(this.props.album)
+        console.log(this.props)
         if (!this.props.album.info) {
             return <Loading/>
         }

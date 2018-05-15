@@ -41,3 +41,15 @@ export function update_album(rsp){
 		});
 	}
 }
+
+
+export function add_song(rsp){
+	return (dispatch,getState)=>{
+		dispatch({
+			type:'ADD_SONG',
+			data:{
+				play_list:rsp
+			}
+		});
+	}
+}

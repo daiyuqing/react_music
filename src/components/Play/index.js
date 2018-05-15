@@ -91,6 +91,7 @@ class Play extends Component{
 	}
 	
 	render(){
+		console.log(this.props)
 		let height=window.screen.availHeight/window.screen.availWidth*10+'rem';
 		if (IsEmpty(this.state.data)) {
 			return <Loading/>;
@@ -155,6 +156,9 @@ class Play extends Component{
 				{play_button}
 				<i className="iconfont icon-next" style={{fontSize:'0.6rem',color:'#fff'}}></i>
 				<i className="iconfont icon-bofangliebiaoicon" style={{fontSize:'0.6rem',color:'#fff'}}></i>
+			</div>
+			<div style={{position:'fixed',right:'0rem',bottom:'0rem',height:'3rem',width:'3rem',backgroundColor:'red'}}>
+				
 			</div>
 			<audio autoPlay>
 			   <source src={data.url} type="audio/mpeg"/>
