@@ -31,6 +31,7 @@ class Nav extends Component{
 const styles={
 	nav:{
 		display:'flex',
+		width:'10rem',
 		height:'1.2rem',
 		justifyContent:'space-around',
 		alignItems:'center',

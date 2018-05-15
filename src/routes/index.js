@@ -6,7 +6,7 @@ import New from '.././containers/New/index.js';
 import Rank from '.././containers/Rank/index.js';
 import AlbumList from '.././components/Home/AlbumList.js';
 import Album from '.././components/Home/Album.js';
-import Play from '.././components/Play/index.js';
+import Play from '.././containers/Play/Play.js';
 const routes=()=>{
 	return <div>
 		<HashRouter history={hashHistory}>

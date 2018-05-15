@@ -55,7 +55,9 @@ class Album extends Component{
         });
     }
     playAll(){
-        this.props.actions.add_song(this.props.album.list.list.info);
+        let play_list=this.props.play_list.concat(this.props.album.list.list.info);
+        this.props.actions.add_song(play_list);
+        location.href='#/play/'+this.props.album.list.list.info[0].hash;
     }
     render() {
         console.log(this.props)

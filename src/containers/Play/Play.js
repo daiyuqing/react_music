@@ -1,12 +1,15 @@
-import React, {Component} from 'react';
+/**
+	音乐播放组件
+*/
+
+import React, { Component } from 'react';
 import { connect } from 'react-redux';
 import { bindActionCreators } from 'redux';
 import * as actions from '../.././actions/music.js';
-import New from '../../components/New/New.js';
-
+import Play from '../../components/Play/index.js';
 export default connect(
-  (state)=>state.Music,
+  	(state)=>state.Music,
     (dispatch)=>({
         actions:bindActionCreators(actions, dispatch)
     })
-)(New);
+)(Play);

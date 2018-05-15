@@ -3,11 +3,9 @@
 */
 
 import React, { Component } from 'react';
-import { connect } from 'react-redux';
-import { bindActionCreators } from 'redux';
 import {IsEmpty,formatTime,formatLength} from '../.././util/tools.js';
 import Loading from '../.././components/common/Loading.js';
-import * as actions from '../.././actions/play.js';
+
 class Play extends Component{
 	constructor(){
 		super();
@@ -26,12 +24,11 @@ class Play extends Component{
                console.log(result);
                fetch('/kugou/app/i/krc.php?cmd=100&hash='+hash+'&timelength=222000').then( (res) => res.text()).then(
 		            (res)=>{
-		               console.log(res);
-		               this.setState({
-		                data:result,
-		                krc:res.split('\n'),
-		         		paused:false
-		               })
+		                this.setState({
+		                	data:result,
+		                	krc:res.split('\n'),
+		         		 	paused:false
+		                })
 		            },(error)=>{
 		                console.log(error);
 		            }
@@ -89,9 +86,78 @@ class Play extends Component{
 	changeContent(type){
 		this.setState({show:type});
 	}
-	
+	/*渲染播放歌单*/
+	render_list(){
+		return <div style={{position:'fixed',bottom:'0rem',height:'10rem',width:'10rem',backgroundColor:'#fff'}}>
+			<div style={{height:'1.5rem',width:'9.4rem',display:'flex',borderBottom:'0.02rem solid #ccc',justifyContent:'space-between',alignItems:'center',padding:'0 0.3rem'}}>
+				<i onClick={this.back.bind(this)} className="iconfont icon-close" style={{fontSize:'0.4rem',color:'#999'}}></i>
+				<p style={{fontSize:'0.4rem',color:'#999'}}>播放列表（8）首</p>
+				<p onClick={this.deleteAll.bind(this)} style={{fontSize:'0.4rem',color:'#e9203d'}}>清除</p>
+			</div>
+			<div style={{height:'7.5rem',overflow:'scroll',width:'10rem'}}>
+				{this.props.play_list.map((item,index)=>{
+					let color='#999';
+					if (item.hash==this.props.match.params.hash) {
+						color='#e9203d';
+					}
+					return (<div key={index} style={{width:'9.4rem',marginLeft:'0.3rem',padding:'0.3rem 0',display:'flex',borderBottom:'0.02rem solid #ccc',alignItems:'center'}}>
+							<p onClick={this.checkSong.bind(this,item.hash)} style={{width:'8rem',fontSize:'0.4rem',lineHeight:'0.6rem',color:color}}>{item.filename}</p>
+							<i onClick={this.delete.bind(this,index,item.hash)} className="iconfont icon-close" style={{fontSize:'0.3rem',color:'#999',marginLeft:'1rem'}}></i>
+						</div>)
+				})}
+			</div>
+		</div>
+	}
+	/*切歌*/
+	checkSong(hash){
+		if (hash==this.props.match.params.hash) {
+
+		}else{
+			fetch('/kugou/app/i/getSongInfo.php?cmd=playInfo&hash='+hash).then( (res) => res.json()).then(
+	            (result)=>{
+	               console.log(result);
+	               fetch('/kugou/app/i/krc.php?cmd=100&hash='+hash+'&timelength=222000').then( (res) => res.text()).then(
+			            (res)=>{
+			                this.setState({
+			                	data:result,
+			                	krc:res.split('\n'),
+			         		 	paused:false
+			                });
+			                location.href='#/play/'+hash;
+			            },(error)=>{
+			                console.log(error);
+			            }
+			        );
+	            },(error)=>{
+	                console.log(error);
+	            }
+	        );
+		}
+	}
+	/*清空播放歌单*/
+	deleteAll(){
+		this.props.actions.add_song([]);
+		window.history.back();
+	}
+	/*删除歌单某一首*/
+	delete(i,hash){
+		if (hash==this.props.match.params.hash) {
+			if (this.props.play_list.length==1) {
+				window.history.back();
+			}else{
+				let new_hash='';
+				if (i==this.props.play_list.length-1) {
+					new_hash=this.props.play_list[0].hash;
+				}else{
+					new_hash=this.props.play_list[i+1].hash;
+				}
+				location.href='#/play/'+this.props.album.list.list.info[0].hash;
+			}
+		}
+		this.props.play_list.splice(i,1);
+		this.props.actions.add_song(this.props.play_list);
+	}
 	render(){
-		console.log(this.props)
 		let height=window.screen.availHeight/window.screen.availWidth*10+'rem';
 		if (IsEmpty(this.state.data)) {
 			return <Loading/>;
@@ -157,9 +223,7 @@ class Play extends Component{
 				<i className="iconfont icon-next" style={{fontSize:'0.6rem',color:'#fff'}}></i>
 				<i className="iconfont icon-bofangliebiaoicon" style={{fontSize:'0.6rem',color:'#fff'}}></i>
 			</div>
-			<div style={{position:'fixed',right:'0rem',bottom:'0rem',height:'3rem',width:'3rem',backgroundColor:'red'}}>
-				
-			</div>
+			{this.render_list()}
 			<audio autoPlay>
 			   <source src={data.url} type="audio/mpeg"/>
 			   <source src={data.url} type="audio/ogg"/>
@@ -168,9 +232,4 @@ class Play extends Component{
 		</div>
 	}
 }
-export default connect(
-  	(state)=>state.Music,
-    (dispatch)=>({
-        actions:bindActionCreators(actions, dispatch)
-    })
-)(Play);
+export default Play;
