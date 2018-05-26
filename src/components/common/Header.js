@@ -1,10 +1,10 @@
 
 import React,{Component} from 'react';
-
+import {Link} from 'react-router-dom';
 class Header extends Component{
 	render(){
 		return(<div style={styles.header}>
-                <i className="iconfont icon-user-round-circle-o" style={{fontSize:'0.8rem',color:'#fff'}}></i>
+				<Link to='/login'><i className="iconfont icon-user-round-circle-o" style={{fontSize:'0.8rem',color:'#fff'}}></i></Link>
                 <div style={styles.input_box}>
                 	<i className="iconfont icon-search" style={{fontSize:'0.5rem',color:'#aaa',marginLeft:'0.2rem'}}></i>
 	                <input placeholder='请输入关键字' style={styles.input}/>

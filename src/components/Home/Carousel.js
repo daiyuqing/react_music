@@ -1,25 +1,15 @@
 import React, { Component } from 'react';
-import Slider from 'react-slick';
-// import "slick-carousel/slick/slick.css";
-// import "slick-carousel/slick/slick-theme.css";
+import ReactSwipe from 'react-swipe';
 class Carousel extends Component{
-    render() {
-        let settings ={
-            dots:true,
-            infinite:true,
-            speed:500,
-            slidesToShow:1,
-            slidesToScroll:1
-        }
+     render() {
         return (
-               <Slider {...settings}>
-                <div><h3>1</h3></div>
-                <div><h3>2</h3></div>
-                <div><h3>3</h3></div>
-                <div><h3>4</h3></div>
-                <div><h3>5</h3></div>
-                <div><h3>6</h3></div>
-            </Slider>
+            <ReactSwipe className="carousel" swipeOptions={{continuous: false,auto: 2000}}>
+                {this.props.banner.map((item,index)=>{
+                    return <div key={index}>
+                        <img src={item.imgurl} style={{width:'10rem',height:'4rem'}} alt=""/>
+                    </div>
+                })}
+            </ReactSwipe>
         );
     }
 }

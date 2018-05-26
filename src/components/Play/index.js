@@ -14,29 +14,17 @@ class Play extends Component{
 			krc:[],			//歌词
 			show:'pic',     //当前显示图片还是歌词
 			percent:0,      //播放进度
-			paused:true
+			paused:true,
+			showList:false //是否显示播放歌单
 		}
 	}
 	componentWillMount(){
+		if (IsEmpty(this.props.play_list)) {
+			window.history.back();
+			return;
+		}
 		let hash=this.props.match.params.hash;
-		fetch('/kugou/app/i/getSongInfo.php?cmd=playInfo&hash='+hash).then( (res) => res.json()).then(
-            (result)=>{
-               console.log(result);
-               fetch('/kugou/app/i/krc.php?cmd=100&hash='+hash+'&timelength=222000').then( (res) => res.text()).then(
-		            (res)=>{
-		                this.setState({
-		                	data:result,
-		                	krc:res.split('\n'),
-		         		 	paused:false
-		                })
-		            },(error)=>{
-		                console.log(error);
-		            }
-		        );
-            },(error)=>{
-                console.log(error);
-            }
-        );
+		this.getSongInfo(hash);
 	}
 	componentDidMount(){
 		let self=this;
@@ -55,9 +43,15 @@ class Play extends Component{
 		//注册进度条点击事件
 		setTimeout(()=>{
 			try{
+				let audio=document.getElementsByTagName('audio')[0];
+				audio.loop = false;//取消单曲循环即可：
+				audio.addEventListener('ended', function () {
+					self.nextSong();
+				}, false);
+
 				let progress_bar=document.getElementsByClassName('progress_bar')[0];
 				progress_bar.addEventListener('click',function(e){
-					let percent=e.offsetX/window.screen.width*10/7;
+					let percent=e.offsetX/document.body.clientWidth*10/7;
 					self.setState({percent:percent});
 					let audio=document.getElementsByTagName('audio')[0];
 					audio.currentTime= audio.duration*percent;
@@ -66,6 +60,29 @@ class Play extends Component{
 				
 			}
 		},1000);
+	}
+	getSongInfo(hash){
+		fetch('/kugou/app/i/getSongInfo.php?cmd=playInfo&hash='+hash).then( (res) => res.json()).then(
+            (result)=>{
+               console.log(result);
+               fetch('/kugou/app/i/krc.php?cmd=100&hash='+hash+'&timelength=222000').then( (res) => res.text()).then(
+		            (res)=>{
+		                this.setState({
+		                	data:result,
+		                	krc:res.split('\n'),
+		         		 	paused:false
+		                });
+		                window.history.replaceState(null, "react-music", '#/play/'+result.hash);
+		                let audio=document.getElementsByTagName('audio')[0];
+						audio.load();
+		            },(error)=>{
+		                console.log(error);
+		            }
+		        );
+            },(error)=>{
+                console.log(error);
+            }
+        );
 	}
 	//设置播或暂停
 	paused(paused){
@@ -88,16 +105,17 @@ class Play extends Component{
 	}
 	/*渲染播放歌单*/
 	render_list(){
+		if (!this.state.showList) {return}
 		return <div style={{position:'fixed',bottom:'0rem',height:'10rem',width:'10rem',backgroundColor:'#fff'}}>
 			<div style={{height:'1.5rem',width:'9.4rem',display:'flex',borderBottom:'0.02rem solid #ccc',justifyContent:'space-between',alignItems:'center',padding:'0 0.3rem'}}>
-				<i onClick={this.back.bind(this)} className="iconfont icon-close" style={{fontSize:'0.4rem',color:'#999'}}></i>
-				<p style={{fontSize:'0.4rem',color:'#999'}}>播放列表（8）首</p>
+				<i onClick={this.hideList.bind(this)} className="iconfont icon-close" style={{fontSize:'0.4rem',color:'#999'}}></i>
+				<p style={{fontSize:'0.4rem',color:'#999'}}>播放列表（{this.props.play_list.length}）首</p>
 				<p onClick={this.deleteAll.bind(this)} style={{fontSize:'0.4rem',color:'#e9203d'}}>清除</p>
 			</div>
 			<div style={{height:'7.5rem',overflow:'scroll',width:'10rem'}}>
 				{this.props.play_list.map((item,index)=>{
 					let color='#999';
-					if (item.hash==this.props.match.params.hash) {
+					if (item.hash==this.state.data.hash) {
 						color='#e9203d';
 					}
 					return (<div key={index} style={{width:'9.4rem',marginLeft:'0.3rem',padding:'0.3rem 0',display:'flex',borderBottom:'0.02rem solid #ccc',alignItems:'center'}}>
@@ -108,30 +126,18 @@ class Play extends Component{
 			</div>
 		</div>
 	}
+	hideList(){
+		this.setState({showList:false});
+	}
+	showList(){
+		this.setState({showList:true});
+	}
 	/*切歌*/
 	checkSong(hash){
-		if (hash==this.props.match.params.hash) {
-
+		if (hash==this.state.data.hash) {
+			return;
 		}else{
-			fetch('/kugou/app/i/getSongInfo.php?cmd=playInfo&hash='+hash).then( (res) => res.json()).then(
-	            (result)=>{
-	               console.log(result);
-	               fetch('/kugou/app/i/krc.php?cmd=100&hash='+hash+'&timelength=222000').then( (res) => res.text()).then(
-			            (res)=>{
-			                this.setState({
-			                	data:result,
-			                	krc:res.split('\n'),
-			         		 	paused:false
-			                });
-			                location.href='#/play/'+hash;
-			            },(error)=>{
-			                console.log(error);
-			            }
-			        );
-	            },(error)=>{
-	                console.log(error);
-	            }
-	        );
+			this.getSongInfo(hash);
 		}
 	}
 	/*清空播放歌单*/
@@ -151,11 +157,54 @@ class Play extends Component{
 				}else{
 					new_hash=this.props.play_list[i+1].hash;
 				}
-				location.href='#/play/'+this.props.album.list.list.info[0].hash;
+				this.getSongInfo(new_hash);
 			}
 		}
 		this.props.play_list.splice(i,1);
 		this.props.actions.add_song(this.props.play_list);
+	}
+	prevSong(){
+		let hash=this.state.data.hash;
+		let play_list=this.props.play_list;
+		for(let i in play_list){
+			if (play_list[i].hash==hash) {
+				let new_hash='';
+				if (play_list.length==1) {
+					new_hash=hash;
+				}else{
+					if (i==0) {
+						new_hash=play_list[play_list.length-1].hash;
+					}else{
+						let index=parseInt(i)-1;
+						new_hash=play_list[index].hash;
+					}
+				}
+				this.getSongInfo(new_hash);
+				let audio=document.getElementsByTagName('audio')[0];
+				audio.load();
+			}
+		}
+	}
+	nextSong(){
+		let hash=this.state.data.hash;
+		let play_list=this.props.play_list;
+		for(let i in play_list){
+			if (play_list[i].hash==hash) {
+				let new_hash='';
+				if (play_list.length==1) {
+					new_hash=hash;
+				}else{
+					if (i==play_list.length-1) {
+						new_hash=play_list[0].hash;
+					}else{
+						let index=parseInt(i)+1;
+						new_hash=play_list[index].hash;
+					}
+				}
+				this.getSongInfo(new_hash);
+
+			}
+		}
 	}
 	render(){
 		let height=window.screen.availHeight/window.screen.availWidth*10+'rem';
@@ -218,10 +267,10 @@ class Play extends Component{
 			</div>
 			<div style={{height:'1rem',width:'9.4rem',padding:'0.3rem',display:'flex',flexDirection:'row',alignItems:'center',justifyContent:'space-between'}}>
 				<i className="iconfont icon-shunxubofang" style={{fontSize:'0.6rem',color:'#fff'}}></i>
-				<i  className="iconfont icon-prev" style={{fontSize:'0.6rem',color:'#fff'}}></i>
+				<i onClick={this.prevSong.bind(this)} className="iconfont icon-prev" style={{fontSize:'0.6rem',color:'#fff'}}></i>
 				{play_button}
-				<i className="iconfont icon-next" style={{fontSize:'0.6rem',color:'#fff'}}></i>
-				<i className="iconfont icon-bofangliebiaoicon" style={{fontSize:'0.6rem',color:'#fff'}}></i>
+				<i onClick={this.nextSong.bind(this)} className="iconfont icon-next" style={{fontSize:'0.6rem',color:'#fff'}}></i>
+				<i onClick={this.showList.bind(this)} className="iconfont icon-bofangliebiaoicon" style={{fontSize:'0.6rem',color:'#fff'}}></i>
 			</div>
 			{this.render_list()}
 			<audio autoPlay>

@@ -7,8 +7,6 @@ import React, { Component } from 'react';
 import {Link} from 'react-router-dom';
 import { connect } from 'react-redux';
 import { bindActionCreators } from 'redux';
-import back  from '../.././static/images/back.png';
-import music  from '../.././static/images/music.png';
 import * as actions from '../.././actions/music.js';
 class AlbumList extends Component{
     constructor(){
@@ -16,7 +14,6 @@ class AlbumList extends Component{
     }
    
     render() {
-        console.log(this.props)
         return (
             <div style={{width:'10rem'}}>
                 <div style={{width:'10rem',height:'1.3rem',display:'flex',alignItems:'center',background:'#e9203d',boxSizing:'border-box'}}>

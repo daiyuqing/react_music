@@ -60,4 +60,9 @@ var formatLength=function(str){
 		return 0;
 	}
 }
-export {IsEmpty,formatTime,formatLength};
+
+
+var getLocalTime=function(nS){
+    return new Date(parseInt(nS) * 1000).toLocaleString('chinese', {hour12: false}).replace(/\//g, '-');
+}
+export {IsEmpty,formatTime,formatLength,getLocalTime};

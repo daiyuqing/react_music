@@ -34,8 +34,8 @@ const config={
 	            exclude: path.resolve(SRC_PATH, 'node_modules'),
 	            include: SRC_PATH,
 	            use: [
-	            	{ loader: 'style-loader'},
-	            	{ loader: 'css-loader'}
+	            	{ loader: 'css-loader'},
+	            	{ loader: 'style-loader'}
 	            ]
 			},
 			{ 

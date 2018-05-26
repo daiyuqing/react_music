@@ -20,7 +20,7 @@ export default (state=initState,action)=>{
 			break;
 		case 'UPDATE_BANNER':
 			return Object.assign({},state,{
-                banner: action.data.new_song
+                banner: action.data.banner
               });
 			break;
 		case 'UPDATE_PLIST':

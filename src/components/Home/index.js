@@ -5,7 +5,7 @@ import * as actions from '../.././actions/music.js';
 import Header from '../.././components/common/Header.js';
 import Nav from '../.././components/common/Nav.js';
 import Recommend from '../.././components/Home/Recommend.js';
-// import Carousel from '../.././components/Home/Carousel.js';
+
 class Home extends Component{
 	constructor(){
         super();

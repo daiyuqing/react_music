@@ -7,6 +7,10 @@ import Rank from '.././containers/Rank/index.js';
 import AlbumList from '.././components/Home/AlbumList.js';
 import Album from '.././components/Home/Album.js';
 import Play from '.././containers/Play/Play.js';
+import Login from '.././containers/User/Login.js';
+import Center from '.././containers/User/Center.js';
+import Love from '.././containers/User/Love.js';
+import RankList from '.././components/Rank/RankList.js';
 const routes=()=>{
 	return <div>
 		<HashRouter history={hashHistory}>
@@ -14,7 +18,11 @@ const routes=()=>{
 			  <Route exact path='/' component={Home}/>
 			  <Route path='/artist' component={Artist}/>
 			  <Route path='/new' component={New}/>
-			  <Route path='/rank' component={Rank}/>
+			  <Route path='/rank' exact component={Rank}/>
+			  <Route path='/rank/list/:id' component={RankList}/>
+			  <Route path='/login' component={Login}/>
+			  <Route path='/center' component={Center}/>
+			  <Route path='/love' component={Love}/>
 			  <Route path='/albumList' component={AlbumList}/>
 			  <Route path='/album/:id' component={Album}/>
 			  <Route path='/play/:hash' component={Play}/>

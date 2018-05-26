@@ -12,10 +12,16 @@ class Album extends Component{
     constructor(){
         super();
         this.state={
-            data:{}
+            collection:''
         }
     }
     componentWillMount(){
+        let collection=localStorage.getItem('collection');
+        if (collection) {
+            this.setState({
+                collection:collection
+            });
+        }
         if (this.props.match.params.id) {
             let id=this.props.match.params.id;
             try{
@@ -35,29 +41,39 @@ class Album extends Component{
             return;
         }
     }
-    collect(id,i){
+    collect(hash,filename,i){
         let collection=localStorage.getItem('collection');
         if (collection) {
             let newCollection=collection.split(',');
-            if (newCollection.indexOf(id)>-1) {
-                let index=newCollection.indexOf(id);
+            if (collection.indexOf(hash)>-1) {
+                let index=newCollection.indexOf(hash+'|'+filename);
                 newCollection.splice(index,1);
             }else{
-                newCollection.push(id);
+                newCollection.push(hash+'|'+filename);
             }
             localStorage.setItem('collection',newCollection.join(','));
+            this.setState({
+                collection:newCollection.join(',')
+            });
         }else{
-            localStorage.setItem('collection',id);
+            localStorage.setItem('collection',hash+'|'+filename);
+            this.setState({
+                collection:hash+'|'+filename
+            });
         }
-        this.state.new_song[i].collected=!this.state.new_song[i].collected;
-        this.setState({
-            new_song:this.state.new_song
-        });
     }
+    //播放全部
     playAll(){
         let play_list=this.props.play_list.concat(this.props.album.list.list.info);
         this.props.actions.add_song(play_list);
         location.href='#/play/'+this.props.album.list.list.info[0].hash;
+    }
+    //点击歌曲，加入歌单，跳到播放页面
+    playSong(item){
+        let play_list=this.props.play_list;
+        play_list.push(item);
+        this.props.actions.add_song(play_list);
+        location.href='#/play/'+item.hash;
     }
     render() {
         console.log(this.props)
@@ -71,7 +87,7 @@ class Album extends Component{
             <div style={{width:'10rem'}}>
                 <div style={{width:'10rem',height:'1.3rem',display:'flex',alignItems:'center',background:'#e9203d',boxSizing:'border-box'}}>
                     <Link to='/'><i className="iconfont icon-left" style={{fontSize:'0.5rem',color:'#fff',marginLeft:'0.2rem'}}></i></Link>
-                    <span style={{color:'#fff',fontSize:'0.4rem',marginLeft:'3.4rem'}}>歌单</span>
+                    <span style={{color:'#fff',fontSize:'0.4rem',marginLeft:'3.8rem'}}>歌单</span>
                 </div>
                 <div style={{background:'#ccc',borderBottom:'0.04rem solid #e9203d'}}>
                     <div style={{width:'10rem',display:'flex',height:'4.2rem',alignItems:'center'}}>
@@ -89,13 +105,16 @@ class Album extends Component{
                 </div>
                 <div style={{width:'10rem',padding:'0 0.2rem'}}>
                     {list.map((item,index)=>{
-                        return <div key={index} style={{height:'1.5rem',width:'9.6rem',borderBottom:'0.02rem solid #ccc',position:'relative'}}>
-                            <Link to={'/play/'+item.hash}>
-                                <p style={{fontSize:'0.4rem',color:'#333',marginTop:'0.3rem'}}>{item.filename}</p>
-                                <p style={{fontSize:'0.35rem',color:'#666',marginTop:'0.2rem'}}>{item.remark}</p>
-                                <i className="iconfont icon-heart" style={{fontSize:'0.6rem',position:'absolute',right:'0rem',top:'0.4rem',color:'#ccc'}}></i>
-                            </Link>
-                            
+                        let color='#ccc';
+                        if (this.state.collection.indexOf(item.hash)>-1) {
+                            color='#e9203d';
+                        }
+                        return <div key={index}  style={{height:'1.5rem',width:'9.6rem',borderBottom:'0.02rem solid #ccc',position:'relative'}}>
+                                <div onClick={this.playSong.bind(this,item)} style={{width:'7rem'}}>
+                                    <p style={{fontSize:'0.4rem',color:'#333',marginTop:'0.3rem'}}>{item.filename}</p>
+                                    <p style={{fontSize:'0.35rem',color:'#666',marginTop:'0.2rem'}}>{item.remark}</p>  
+                                </div>
+                                <i onClick={this.collect.bind(this,item.hash,item.filename,index)} className="iconfont icon-heart" style={{fontSize:'0.6rem',position:'absolute',right:'0rem',top:'0.4rem',color:color}}></i>
                         </div>
                     })}
                 </div>
