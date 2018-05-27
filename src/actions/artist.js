@@ -1,9 +1,9 @@
-export function update(rsp){
+export function update_singer_class(rsp){
 	return (dispatch,getState)=>{
 		dispatch({
-			type:'Add',
+			type:'UPDATE_SINGER_CLASS',
 			data:{
-				list:[1,2,3]
+				singer_class:rsp
 			}
 		});
 	}

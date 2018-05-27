@@ -4,16 +4,16 @@
 import * as actions from '.././actions/artist.js';
 
 const initState = {
-    list:[1]
+    singerClass:[]
 };
 
 
 
 export default (state=initState,action)=>{
 	switch(action.type){
-		case 'ADD':
+		case 'UPDATE_SINGER_CLASS':
 			return Object.assign({},state,{
-                list: action.data.list
+                singerClass: action.data.singer_class
               });
 		default:
 			return state;

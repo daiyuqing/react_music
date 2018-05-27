@@ -49,7 +49,7 @@ class Login extends Component{
         }
         localStorage.setItem('username',username);
         localStorage.setItem('password',password);
-        location.href='#/center';
+        location.href='#/user/center';
     }
     render() {
         return (

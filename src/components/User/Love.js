@@ -63,7 +63,7 @@ class Love extends Component{
         return (
             <div style={{width:'10rem'}}>
                 <div style={{width:'10rem',height:'1.3rem',display:'flex',alignItems:'center',background:'#e9203d',boxSizing:'border-box'}}>
-                    <Link to='/login'><i className="iconfont icon-left" style={{fontSize:'0.5rem',color:'#fff',marginLeft:'0.2rem'}}></i></Link>
+                    <Link to='/user/center'><i className="iconfont icon-left" style={{fontSize:'0.5rem',color:'#fff',marginLeft:'0.2rem'}}></i></Link>
                     <span style={{color:'#fff',fontSize:'0.4rem',marginLeft:'3.4rem'}}>收藏列表({this.state.collections.length})</span>
                 </div>
                 {content}

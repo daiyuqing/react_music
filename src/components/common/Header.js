@@ -4,11 +4,13 @@ import {Link} from 'react-router-dom';
 class Header extends Component{
 	render(){
 		return(<div style={styles.header}>
-				<Link to='/login'><i className="iconfont icon-user-round-circle-o" style={{fontSize:'0.8rem',color:'#fff'}}></i></Link>
-                <div style={styles.input_box}>
-                	<i className="iconfont icon-search" style={{fontSize:'0.5rem',color:'#aaa',marginLeft:'0.2rem'}}></i>
-	                <input placeholder='请输入关键字' style={styles.input}/>
-                </div>
+				<Link to='/user/login'><i className="iconfont icon-user-round-circle-o" style={{fontSize:'1rem',color:'#fff'}}></i></Link>
+                <Link to='/search'>
+                	<div style={{width:'7rem',borderRadius:'0.8rem',height:'0.8rem',backgroundColor:'#fff',position:'relative',marginLeft:'0.3rem'}}>
+	                	<i className="iconfont icon-search" style={{fontSize:'0.5rem',color:'#aaa',position:'absolute',left:'0.3rem',top:'0.15rem'}}></i>
+		                <p style={{width:'6rem',height:'0.8rem',lineHeight:'0.8rem',color:'#999',fontSize:'0.4rem',marginLeft:'1rem'}}>请输入关键字</p>
+	                </div>
+                </Link>
                 <div style={styles.music}>
                 	<span style={styles.one_paused} className='one paused'></span>
                 	<span style={styles.two_paused} className='two paused'></span>
@@ -57,6 +59,7 @@ const styles={
 	music:{
 		width:'0.4rem',
 		height:'0.4rem',
+		marginLeft:'0.3rem',
 		display:'flex',
 		justifyContent:'space-between',
 		alignItems:'flex-end'
