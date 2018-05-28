@@ -11,12 +11,14 @@ class Header extends Component{
 		                <p style={{width:'6rem',height:'0.8rem',lineHeight:'0.8rem',color:'#999',fontSize:'0.4rem',marginLeft:'1rem'}}>请输入关键字</p>
 	                </div>
                 </Link>
-                <div style={styles.music}>
-                	<span style={styles.one_paused} className='one paused'></span>
-                	<span style={styles.two_paused} className='two paused'></span>
-                	<span style={styles.three_paused} className='three paused'></span>
-                	<span style={styles.four_paused} className='four paused'></span>
-                </div>
+                <Link to='/play'>
+	                <div style={styles.music}>
+	                	<span style={styles.one_paused} className='one paused'></span>
+	                	<span style={styles.two_paused} className='two paused'></span>
+	                	<span style={styles.three_paused} className='three paused'></span>
+	                	<span style={styles.four_paused} className='four paused'></span>
+	                </div>
+                </Link>
             </div>)
 	}
 }

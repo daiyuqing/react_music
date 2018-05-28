@@ -109,9 +109,9 @@ class Album extends Component{
                         if (this.state.collection.indexOf(item.hash)>-1) {
                             color='#e9203d';
                         }
-                        return <div key={index}  style={{height:'1.5rem',width:'9.6rem',borderBottom:'0.02rem solid #ccc',position:'relative'}}>
-                                <div onClick={this.playSong.bind(this,item)} style={{width:'7rem'}}>
-                                    <p style={{fontSize:'0.4rem',color:'#333',marginTop:'0.3rem'}}>{item.filename}</p>
+                        return <div key={index}  style={{width:'9.6rem',borderBottom:'0.02rem solid #ccc',position:'relative'}}>
+                                <div onClick={this.playSong.bind(this,item)} style={{width:'7rem',padding:'0.3rem 0'}}>
+                                    <p style={{fontSize:'0.4rem',color:'#333'}}>{item.filename}</p>
                                     <p style={{fontSize:'0.35rem',color:'#666',marginTop:'0.2rem'}}>{item.remark}</p>  
                                 </div>
                                 <i onClick={this.collect.bind(this,item.hash,item.filename,index)} className="iconfont icon-heart" style={{fontSize:'0.6rem',position:'absolute',right:'0rem',top:'0.4rem',color:color}}></i>
