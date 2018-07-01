@@ -5,7 +5,7 @@ import * as actions from '../.././actions/music.js';
 import New from '../../components/New/New.js';
 
 export default connect(
-  (state)=>state.Music,
+    (state)=>state.Music,
     (dispatch)=>({
         actions:bindActionCreators(actions, dispatch)
     })

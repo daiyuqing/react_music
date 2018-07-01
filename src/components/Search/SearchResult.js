@@ -44,13 +44,18 @@ class SearchResult extends Component{
         let play_list=this.props.play_list.concat(this.state.searchList);
         let list=this.state.searchList;
         this.props.actions.add_song(play_list);
-        location.href='#/play/'+this.state.searchList[0].hash;
+        let hash=list[0].hash;
+        this.props.actions.music_get_hash(hash);
+        this.props.actions.music_control(true);
+        location.href='#/play/'+hash;
     }
     //点击歌曲，加入歌单，跳到播放页面
     playSong(item){
         let play_list=this.props.play_list;
         play_list.push(item);
         this.props.actions.add_song(play_list);
+        this.props.actions.music_get_hash(item.hash);
+        this.props.actions.music_control(true);
         location.href='#/play/'+item.hash;
     }
     collect(hash,filename,i){

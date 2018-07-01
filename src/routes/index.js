@@ -15,8 +15,10 @@ import Love from '.././containers/User/Love.js';
 import RankList from '.././components/Rank/RankList.js';
 import Search from '.././containers/Search/Search.js';
 import SearchResult from '.././containers/Search/SearchResult.js';
+import Player from '.././containers/Play/Player.js';
 const routes=()=>{
 	return <div>
+		<Player/>
 		<HashRouter history={hashHistory}>
 			<Switch>
 			  <Route exact path='/' component={Home}/>

@@ -6,11 +6,19 @@ const initState = {
     new_song:[],
     plist:[],
     album:{},
-    play_list:[]
+    play_list:[],
+    playing:false,
+    progress:{currentTime: 0, percentage: 0},
+    audio:{},
+    lyricsUpdate:{},
+    volumeObj:0.5,
+    hash:'',
+    currentMusic:{},
+    krc:''
 };
 
 
-
+//展示歌单和播放歌单
 export default (state=initState,action)=>{
 	switch(action.type){
 		case 'UPDATE_NEW_SONG':
@@ -34,11 +42,44 @@ export default (state=initState,action)=>{
               });
 			break;
 		case 'ADD_SONG':
-		console.log(action.data.play_list);
 			return Object.assign({},state,{
                 play_list: action.data.play_list
               });
 			break;
+		// 当前播放的音乐hash
+		case 'MUSIC_GET_HASH':
+            return Object.assign({},state,{
+                hash: action.data.hash
+              });
+            break;
+        // 当前播放的音乐
+		case 'CURRENT_MUSIC':
+            return Object.assign({},state, action.data);
+            break;
+        // 当前播放的音乐对象
+        case 'MUSIC_OBJ':
+            return Object.assign({},state, action.data);
+            break;
+        // 播放控制
+        case 'MUSIC_CONTROL':
+            return Object.assign({}, state, action.data);
+           	break;
+        // 播放进度
+        case 'MUSIC_PLAYTIME':
+            return Object.assign({}, state, action.data);
+            break;
+        // 声音对象
+        case 'MUSIC_AUDIO':
+            return Object.assign({}, state, action.data);
+	        break;
+        // 音量
+        case 'MUSIC_VOLUME':
+            return Object.assign({}, state, action.data);
+        	break;
+        // 歌词
+        case 'MUSIC_KRC':
+            return Object.assign({}, state, action.data);
+        	break;
 		default:
 			return state;
 	}

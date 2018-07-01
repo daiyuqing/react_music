@@ -11,7 +11,7 @@ class Header extends Component{
 		                <p style={{width:'6rem',height:'0.8rem',lineHeight:'0.8rem',color:'#999',fontSize:'0.4rem',marginLeft:'1rem'}}>请输入关键字</p>
 	                </div>
                 </Link>
-                <Link to='/play'>
+                <Link to='/play/5A9B04E32B1C5CBE4B08E8030474E24F'>
 	                <div style={styles.music}>
 	                	<span style={styles.one_paused} className='one paused'></span>
 	                	<span style={styles.two_paused} className='two paused'></span>
@@ -59,32 +59,32 @@ const styles={
 		margin:'0 0.3rem'
 	},
 	music:{
-		width:'0.4rem',
-		height:'0.4rem',
+		width:'0.6rem',
+		height:'0.6rem',
 		marginLeft:'0.3rem',
 		display:'flex',
 		justifyContent:'space-between',
 		alignItems:'flex-end'
 	},
 	one_paused:{
-		width:'0.1rem',
-		height:'0.4rem',
-		background:'#fff'
+        width: '0.08rem',
+        background: '#fff',
+		height: '0.6rem'
 	},
 	two_paused:{
-		width:'0.025rem',
-		height:'0.1rem',
-		background:'#fff'
+        width: '0.08rem',
+        background: '#fff',
+		height: '0.2rem'
 	},
 	three_paused:{
-		width:'0.075rem',
-		height:'0.3rem',
-		background:'#fff'
+        width: '0.08rem',
+        background: '#fff',
+		height: '0.6rem'
 	},
 	four_paused:{
-		width:'0.05rem',
-		height:'0.2rem',
-		background:'#fff'
+        width: '0.08rem',
+        background: '#fff',
+		height: '0.4rem'
 	}
 }
 

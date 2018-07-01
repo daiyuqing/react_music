@@ -5,7 +5,7 @@
 import React, { Component } from 'react';
 import {IsEmpty,formatTime,formatLength} from '../.././util/tools.js';
 import Loading from '../.././components/common/Loading.js';
-
+import * as actions from '../.././actions/music.js';
 class Play extends Component{
 	constructor(){
 		super();
@@ -17,83 +17,25 @@ class Play extends Component{
 			paused:true,
 			showList:false, //是否显示播放歌单
 		}
+		this.hash='';
 	}
 	componentWillMount(){
-		if (IsEmpty(this.props.play_list)) {
-			window.history.back();
-			return;
+		if (this.props.hash) {
+			window.history.replaceState(null, "react-music", '#/play/'+this.props.hash);
 		}
-		let hash=this.props.match.params.hash;
-		this.getSongInfo(hash);
+	}
+	componentWillReceiveProps(nextProps){
+		if (nextProps.hash!=this.hash) {
+			window.history.replaceState(null, "react-music", '#/play/'+nextProps.hash);
+		}
 	}
 	componentDidMount(){
-		let self=this;
-		//设置定时器每1秒获取当前歌曲的播放进度
-		this.timer=setInterval(()=>{
-			try{
-				let audio=document.getElementsByTagName('audio')[0];
-				let percent=audio.currentTime/audio.duration;
-				self.setState({
-					percent:percent
-				});
-			}catch(e){
-
-			}
-		},1000);
-		//注册进度条点击事件
-		setTimeout(()=>{
-			try{
-				let audio=document.getElementsByTagName('audio')[0];
-				audio.loop = false;//取消单曲循环即可：
-				audio.addEventListener('ended', function () {
-					self.nextSong();
-				}, false);
-
-				let progress_bar=document.getElementsByClassName('progress_bar')[0];
-				progress_bar.addEventListener('click',function(e){
-					let percent=e.offsetX/document.body.clientWidth*10/7;
-					self.setState({percent:percent});
-					let audio=document.getElementsByTagName('audio')[0];
-					audio.currentTime= audio.duration*percent;
-				});
-			}catch(e){
-				
-			}
-		},1000);
+		
 	}
-	getSongInfo(hash){
-		fetch('/kugou/app/i/getSongInfo.php?cmd=playInfo&hash='+hash).then( (res) => res.json()).then(
-            (result)=>{
-               console.log(result);
-               fetch('/kugou/app/i/krc.php?cmd=100&hash='+hash+'&timelength=222000').then( (res) => res.text()).then(
-		            (res)=>{
-		                this.setState({
-		                	data:result,
-		                	krc:res.split('\n'),
-		         		 	paused:false
-		                });
-		                window.history.replaceState(null, "react-music", '#/play/'+result.hash);
-		                let audio=document.getElementsByTagName('audio')[0];
-						audio.load();
-		            },(error)=>{
-		                console.log(error);
-		            }
-		        );
-            },(error)=>{
-                console.log(error);
-            }
-        );
-	}
+
 	//设置播或暂停
 	paused(paused){
-		let audio=document.getElementsByTagName('audio')[0];
-		if (paused) {
-			this.setState({paused:false});
-			audio.play();
-		}else{
-			this.setState({paused:true});
-			audio.pause();
-		}
+		this.props.actions.music_control(paused);
 	}
 	//返回
 	back(){
@@ -137,7 +79,7 @@ class Play extends Component{
 		if (hash==this.state.data.hash) {
 			return;
 		}else{
-			this.getSongInfo(hash);
+			this.props.actions.music_get_hash(hash);
 		}
 	}
 	/*清空播放歌单*/
@@ -157,7 +99,7 @@ class Play extends Component{
 				}else{
 					new_hash=this.props.play_list[i+1].hash;
 				}
-				this.getSongInfo(new_hash);
+				this.props.actions.music_get_hash(new_hash);
 			}
 		}
 		this.props.play_list.splice(i,1);
@@ -179,9 +121,7 @@ class Play extends Component{
 						new_hash=play_list[index].hash;
 					}
 				}
-				this.getSongInfo(new_hash);
-				let audio=document.getElementsByTagName('audio')[0];
-				audio.load();
+				this.props.actions.music_get_hash(new_hash);
 			}
 		}
 	}
@@ -201,75 +141,56 @@ class Play extends Component{
 						new_hash=play_list[index].hash;
 					}
 				}
-				this.getSongInfo(new_hash);
-
+				this.props.actions.music_get_hash(new_hash);
 			}
 		}
 	}
-	touchstart(){
-		clearInterval(this.timer);
-	}
-	touchend(){
-		let audio=document.getElementsByTagName('audio')[0];
-		audio.currentTime= audio.duration*this.state.percent;
-		audio.load();
-		this.timer=setInterval(()=>{
-			try{
-				let audio=document.getElementsByTagName('audio')[0];
-				let percent=audio.currentTime/audio.duration;
-				self.setState({
-					percent:percent
-				});
-			}catch(e){
-
-			}
-		},1000);
-	}
-	touchmove(e){
-		let new_percent=e.touches[0].pageX/document.body.offsetWidth-0.13;
-		if (new_percent<0) {
-			new_percent=0;
-		}
-		if (new_percent>1) {
-			new_percent=1
-		}
-		this.setState({percent:new_percent});
-	}
+	
 	play_krc(text){
 		return formatLength(text.slice(1,9))>this.state.data.timeLength*this.state.percent;
 	}
 	/*拿到当前音乐对应的歌词位置*/
 	getPlayKrc(){
-		return this.state.krc.findIndex(this.play_krc.bind(this));
+		return this.props.krc.findIndex(this.play_krc.bind(this));
+	}
+	onChange(e){
+		this.props.actions.music_control(true);
+        this.props.audio.player.seekTo(parseFloat(e.target.value));
 	}
 	render(){
 		let height=window.screen.availHeight/window.screen.availWidth*10+'rem';
-		if (IsEmpty(this.state.data)) {
+		if (IsEmpty(this.props.play_list)) {
+			return <div>
+				<div style={{height:'1rem',width:'10rem',paddingTop:'0.3rem',backgroundColor:'#e9203d'}}>
+					<i onClick={this.back.bind(this)} className="iconfont icon-left" style={{fontSize:'0.5rem',color:'#fff',marginLeft:'0.3rem',}}></i>
+				</div>
+				<div style={{marginTop:'5rem'}}>
+					<i className="iconfont icon-wubiaoqing" style={{fontSize:'3rem',color:'#666',marginLeft:'3.5rem'}}></i>
+				</div>
+				<p style={{textAlign:'center',fontSize:'0.5rem',color:'#666'}}>当前无音乐!</p>
+			</div>
+		}
+		if (IsEmpty(this.props.currentMusic)||this.props.currentMusic.status==0) {
 			return <Loading/>;
 		}
-		let data=this.state.data;
-		let content=null;
-		let total_time=formatTime(data.timeLength);
-		let played_time='00:00';
-		if (data.timeLength) {
-			played_time=formatTime(data.timeLength*this.state.percent);
-		}
+		let data=this.props.currentMusic;
 		let play_button=null;
-		if (this.state.paused) {
-			play_button=<i onClick={this.paused.bind(this,true)} className="iconfont icon-play" style={{fontSize:'0.8rem',color:'#fff'}}></i>
-		}else{
+		if (this.props.playing) {
 			play_button=<i onClick={this.paused.bind(this,false)} className="iconfont icon-pause" style={{fontSize:'0.8rem',color:'#fff'}}></i>
+		}else{
+			play_button=<i onClick={this.paused.bind(this,true)} className="iconfont icon-play" style={{fontSize:'0.8rem',color:'#fff'}}></i>
 		}
+		let content=null;
 		if (this.state.show=='pic') {
 			content=<div onClick={this.changeContent.bind(this,'krc')} style={{flex:1}}>
-				<img  src={data.imgUrl.replace('{size}','400')} style={{width:'6rem',height:'6rem',borderRadius:'6rem',border:'0.2rem solid #fff',boxShadow:'0 0 0.4rem #000',margin:'2rem 0',}} alt=""/>
+				<img  src={data.album_img.replace('{size}','400')} style={{width:'6rem',height:'6rem',borderRadius:'6rem',border:'0.2rem solid #fff',boxShadow:'0 0 0.4rem #000',margin:'2rem 0',}} alt=""/>
 			</div>
 			
 		}else{
 			let current_index=this.getPlayKrc();
 			content=<div onClick={this.changeContent.bind(this,'pic')} style={{height:'10rem',overflow:'hidden',flex:1}}>
-				<div style={{height:'10rem',marginTop:5-0.8*current_index+'rem'}}>
-					{this.state.krc.map((item,index)=>{
+				<div style={{height:'10rem',transform: 'translateY(5-' + current_index * 0.8 + 'rem)'}}>
+					{this.props.krc.map((item,index)=>{
 						let color='#fff';
 						if (index==current_index-1) {
 							color='#e9203d';
@@ -287,12 +208,9 @@ class Play extends Component{
 			<p style={{height:'1rem',textAlign:'center',fontSize:'0.4rem',color:'#fff'}}>- {data.singerName} -</p>
 			{content}
 			<div style={{height:'1rem',width:'9.4rem',padding:'0.3rem',display:'flex',flexDirection:'row',alignItems:'center',justifyContent:'space-between',position:'relative'}}>
-				<span style={{fontSize:'0.4rem',color:'#fff'}}>{played_time}</span>
-				<div className='progress_bar' style={{width:'7rem',height:'0.1rem',backgroundColor:'#fff'}}>
-					<p style={{width:this.state.percent*7+'rem',height:'0.1rem',backgroundColor:'#e9203d'}}></p>
-				</div>
-				<div onTouchStart={this.touchstart.bind(this)} onTouchEnd={this.touchend.bind(this)} onTouchMove={this.touchmove.bind(this)} style={{height:'0.4rem',width:'0.4rem',borderRadius:'0.4rem',backgroundColor:'#e9203d',position:'absolute',left:1.3+this.state.percent*7+'rem'}}></div>
-				<span style={{fontSize:'0.4rem',color:'#fff'}}>{total_time}</span>
+				<span style={{fontSize:'0.4rem',color:'#fff'}}>{formatTime(this.props.progress.currentTime)}</span>
+				<input type='range' min={0} max={1} step='any' value={this.props.progress.percentage || '0'} style={{ width:'7rem',height:'1rem',background:'#fff'}} onChange={this.onChange.bind(this)}/>
+				<span style={{fontSize:'0.4rem',color:'#fff'}}>{formatTime(data.timeLength)}</span>
 			</div>
 			<div style={{height:'1rem',width:'9.4rem',padding:'0.3rem',display:'flex',flexDirection:'row',alignItems:'center',justifyContent:'space-between'}}>
 				<i className="iconfont icon-shunxubofang" style={{fontSize:'0.6rem',color:'#fff'}}></i>
@@ -302,11 +220,6 @@ class Play extends Component{
 				<i onClick={this.showList.bind(this)} className="iconfont icon-bofangliebiaoicon" style={{fontSize:'0.6rem',color:'#fff'}}></i>
 			</div>
 			{this.render_list()}
-			<audio autoPlay>
-			   <source src={data.url} type="audio/mpeg"/>
-			   <source src={data.url} type="audio/ogg"/>
-				您的浏览器不支持 audio 元素。
-			</audio>
 		</div>
 	}
 }

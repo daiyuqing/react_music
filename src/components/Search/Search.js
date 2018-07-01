@@ -39,8 +39,13 @@ class Search extends Component{
 			this.setState({search_history:search_history});
 		} 
     }
-    search(){
-    	if (this.refs.input.value) {
+    search(keyword){
+    	if (keyword) {
+    		this.state.search_history.push(keyword);
+			localStorage.setItem('search_history',JSON.stringify(this.state.search_history));
+			localStorage.setItem('search_history_index',this.state.search_history.length-1);
+			location.href='#/search/result';
+    	}else if (this.refs.input.value) {
 			this.state.search_history.push(this.refs.input.value);
 			localStorage.setItem('search_history',JSON.stringify(this.state.search_history));
 			localStorage.setItem('search_history_index',this.state.search_history.length-1);
@@ -77,7 +82,7 @@ class Search extends Component{
 	            			color='#e9203d';
 	            			border_color='#e9203d';
 	            		}
-	            		return <p key={index} style={{display:'inline-block',padding:'0.3rem',border:'0.01rem solid '+border_color,borderRadius:'1rem',margin:'0.3rem 1rem 0rem 0rem',color:color,fontSize:'0.4rem'}}>{item.keyword}</p>
+	            		return <p onClick={this.search.bind(this,item.keyword)} key={index} style={{display:'inline-block',padding:'0.3rem',border:'0.01rem solid '+border_color,borderRadius:'1rem',margin:'0.3rem 1rem 0rem 0rem',color:color,fontSize:'0.4rem'}}>{item.keyword}</p>
 	            	})}
 	            	<div style={{borderBottom:'0.01rem solid #ccc',height:'1.2rem',lineHeight:'1.2rem',fontSize:'0.4rem',color:'#666',width:'9.4rem',display:'flex',justifyContent:'space-between'}}>
 			            <p style={{height:'1.2rem',lineHeight:'1.2rem',fontSize:'0.4rem',color:'#666'}}>搜索历史</p>

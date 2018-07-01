@@ -53,3 +53,69 @@ export function add_song(rsp){
 		});
 	}
 }
+
+export function music_playtime(rsp){
+	return (dispatch,getState)=>{
+		dispatch({
+			type:'MUSIC_PLAYTIME',
+			data:{
+				progress:rsp
+			}
+		});
+	}
+}
+
+export function music_get_hash(rsp){
+	return (dispatch,getState)=>{
+		dispatch({
+			type:'MUSIC_GET_HASH',
+			data:{
+				hash:rsp
+			}
+		});
+	}
+}
+
+export function music_control(rsp){
+	return (dispatch,getState)=>{
+		dispatch({
+			type:'MUSIC_CONTROL',
+			data:{
+				playing:rsp
+			}
+		});
+	}
+}
+
+export function current_music(rsp){
+	return (dispatch,getState)=>{
+		dispatch({
+			type:'CURRENT_MUSIC',
+			data:{
+				currentMusic:rsp
+			}
+		});
+	}
+}
+
+export function music_krc(rsp){
+	return (dispatch,getState)=>{
+		dispatch({
+			type:'MUSIC_KRC',
+			data:{
+				krc:rsp
+			}
+		});
+	}
+}
+
+export function add_audio(rsp){
+	return (dispatch,getState)=>{
+		dispatch({
+			type:'MUSIC_OBJ',
+			data:{
+				audio:rsp
+			}
+		});
+	}
+}

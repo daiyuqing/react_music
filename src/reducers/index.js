@@ -8,7 +8,7 @@ import { combineReducers } from 'redux';
 const rootReducer= combineReducers({
 	Artist,
 	Rank,
-	Music
+	Music 
 });
 
 

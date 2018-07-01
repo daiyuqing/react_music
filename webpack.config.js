@@ -33,19 +33,19 @@ const config={
 				test: /\.css$/,
 	            exclude: path.resolve(SRC_PATH, 'node_modules'),
 	            include: SRC_PATH,
-	            use: [
-	            	{ loader: 'css-loader'},
-	            	{ loader: 'style-loader'}
-	            ]
+	            use:'style-loader!css-loader'
 			},
 			{ 
 				test: /\.scss$/,
 	            exclude: path.resolve(SRC_PATH, 'node_modules'),
 	            include: SRC_PATH,
-	            use: [
-	            	{ loader: 'css-loader'},
-	            	{ loader: 'sass-loader'}
-	            ]
+	            use: [{
+	            	loader: "style-loader" // 将 JS 字符串生成为 style 节点
+	            }, {
+	                loader: "css-loader" // 将 CSS 转化成 CommonJS 模块
+	            }, {
+	                loader: "sass-loader" // 将 Sass 编译成 CSS
+	            }]
 			},
 			{ 
 				test: /\.(png|jpg|gif)$/,

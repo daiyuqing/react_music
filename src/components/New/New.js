@@ -1,6 +1,4 @@
 import React, {Component} from 'react';
-import { connect } from 'react-redux';
-import { bindActionCreators } from 'redux';
 import * as actions from '../.././actions/music.js';
 import Header from '../.././components/common/Header.js';
 import Nav from '../.././components/common/Nav.js';
@@ -42,6 +40,14 @@ class New extends Component{
             });
         }
     }
+    play(item){
+        let play_list=this.props.play_list;
+        play_list.push(item);
+        this.props.actions.add_song(play_list);
+        this.props.actions.music_get_hash(item.hash);
+        this.props.actions.music_control(true);
+        location.href='#/play/'+item.hash;
+    }
 	render(){
         let content=null;
         if (IsEmpty(this.props.new_song)) {
@@ -53,7 +59,7 @@ class New extends Component{
                         if (this.state.collection.indexOf(item.hash)>-1) {
                             color='#e9203d';
                         }
-                        return (<div  key={item.audio_id} style={{width:'9.5rem',display:'flex',alignItems:'center',justifyContent:'space-between',borderBottom:'0.01rem solid #cccccc',padding:'0.4rem 0'}}>
+                        return (<div onClick={this.play.bind(this,item)}  key={item.audio_id} style={{width:'9.5rem',display:'flex',alignItems:'center',justifyContent:'space-between',borderBottom:'0.01rem solid #cccccc',padding:'0.4rem 0'}}>
                             <p style={{color:'#666666',fontSize:'0.4rem',width:'8rem',lineHeight:'0.5rem'}}>{item.filename}</p>
                             <i onClick={this.collect.bind(this,item.hash,item.filename,index)} className="iconfont icon-heart" style={{fontSize:'0.5rem',color:color}}></i>
                         </div>)
