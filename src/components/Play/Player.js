@@ -43,7 +43,7 @@ class Player extends Component{
 		for(let i in play_list){
 			if (this.props.hash==play_list[i].hash) {
 				if (play_list.length==1) {
-					this.props.actions.music_get_hash(play_list[0].hash);
+					this.props.audio.player.seekTo(0);
 				}else if (i==play_list.length-1) {
 					this.props.actions.music_get_hash(play_list[0].hash);
 				}else{
