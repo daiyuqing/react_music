@@ -42,7 +42,7 @@ class Home extends Component{
     }
 	render(){
 		return(<div>
-				<Header/>
+				<Header playing={this.props.playing}/>
 				<Nav page='home'/>
 				<Recommend plist={this.props.plist} banner={this.props.banner} new_song={this.props.new_song}/>
 			</div>)

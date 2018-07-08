@@ -25,7 +25,6 @@ class SearchResult extends Component{
 	        try{
 	            fetch('/mobilecdn/api/v3/search/song?format=json&keyword='+keyword+'&page=1&pagesize=20').then( (res) => res.json()).then(
 	                (result)=>{
-	                    console.log(result);
 	                    this.setState({
 	                    	searchList:result.data.info,
 	                    	keyword:keyword

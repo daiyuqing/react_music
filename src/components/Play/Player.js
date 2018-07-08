@@ -23,7 +23,6 @@ class Player extends Component{
 		if (nextProps.hash!=this.hash&&nextProps.hash!=undefined) {
 			fetch('/kugou/app/i/getSongInfo.php?cmd=playInfo&hash='+nextProps.hash).then( (res) => res.json()).then(
 	            (result)=>{
-	               console.log(result);
 	               this.props.actions.current_music(result);
 	               fetch('/kugou/app/i/krc.php?cmd=100&hash='+nextProps.hash+'&timelength=222000').then( (res) => res.text()).then(
 			            (res)=>{

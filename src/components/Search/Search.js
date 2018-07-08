@@ -18,7 +18,6 @@ class Search extends Component{
         try{
             fetch('/mobilecdn/api/v3/search/hot').then( (res) => res.json()).then(
                 (result)=>{
-                    console.log(result);
                     this.setState({
                     	hot_search:result.data.info
                     });
@@ -71,7 +70,7 @@ class Search extends Component{
 	                	<i className="iconfont icon-search" style={{fontSize:'0.5rem',color:'#aaa',position:'absolute',left:'0.3rem',top:'0.15rem'}}></i>
 		                <input ref='input' placeholder='请输入关键字' style={{width:'5rem',height:'0.8rem',lineHeight:'0.8rem',color:'#999',fontSize:'0.4rem',marginLeft:'1rem',border:'none'}}/>
 	                </div>
-	                <p onClick={this.search.bind(this)} style={{height:'1.2rem',lineHeight:'1.2rem',color:'#fff',fontSize:'0.4rem',marginLeft:'0.6rem'}}>搜索</p>
+	                <p onClick={this.search.bind(this,'')} style={{height:'1.2rem',lineHeight:'1.2rem',color:'#fff',fontSize:'0.4rem',marginLeft:'0.6rem'}}>搜索</p>
 	            </div>
 	            <div style={{width:'10rem',padding:'0 0.3rem'}}>
 	            	<p style={{borderBottom:'0.01rem solid #ccc',height:'1.2rem',lineHeight:'1.2rem',fontSize:'0.4rem',color:'#666',width:'9.4rem'}}>热门搜索</p>

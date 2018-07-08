@@ -13,10 +13,10 @@ class Header extends Component{
                 </Link>
                 <Link to='/play/5A9B04E32B1C5CBE4B08E8030474E24F'>
 	                <div style={styles.music}>
-	                	<span style={styles.one_paused} className='one paused'></span>
-	                	<span style={styles.two_paused} className='two paused'></span>
-	                	<span style={styles.three_paused} className='three paused'></span>
-	                	<span style={styles.four_paused} className='four paused'></span>
+	                	<span style={styles.one_paused} className={this.props.playing?'one playing':'one paused'}></span>
+	                	<span style={styles.two_paused} className={this.props.playing?'two playing':'two paused'}></span>
+	                	<span style={styles.three_paused} className={this.props.playing?'three playing':'three paused'}></span>
+	                	<span style={styles.four_paused} className={this.props.playing?'four playing':'four paused'}></span>
 	                </div>
                 </Link>
             </div>)

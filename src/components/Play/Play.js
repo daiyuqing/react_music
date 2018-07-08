@@ -147,7 +147,7 @@ class Play extends Component{
 	}
 	
 	play_krc(text){
-		return formatLength(text.slice(1,9))>this.state.data.timeLength*this.state.percent;
+		return formatLength(text.slice(1,9))>this.props.progress.currentTime;
 	}
 	/*拿到当前音乐对应的歌词位置*/
 	getPlayKrc(){
@@ -183,13 +183,13 @@ class Play extends Component{
 		let content=null;
 		if (this.state.show=='pic') {
 			content=<div onClick={this.changeContent.bind(this,'krc')} style={{flex:1}}>
-				<img  src={data.album_img.replace('{size}','400')} style={{width:'6rem',height:'6rem',borderRadius:'6rem',border:'0.2rem solid #fff',boxShadow:'0 0 0.4rem #000',margin:'2rem 0',}} alt=""/>
+				<img  src={data.imgUrl.replace('{size}','400')} style={{width:'6rem',height:'6rem',borderRadius:'6rem',border:'0.2rem solid #fff',boxShadow:'0 0 0.4rem #000',margin:'2rem 0'}} className={this.props.playing?'rotate playing':'rotate paused'} alt=""/>
 			</div>
 			
 		}else{
 			let current_index=this.getPlayKrc();
 			content=<div onClick={this.changeContent.bind(this,'pic')} style={{height:'10rem',overflow:'hidden',flex:1}}>
-				<div style={{height:'10rem',transform: 'translateY(5-' + current_index * 0.8 + 'rem)'}}>
+				<div style={{height:'10rem',transform: 'translateY(' + (5-current_index * 0.8) + 'rem)'}}>
 					{this.props.krc.map((item,index)=>{
 						let color='#fff';
 						if (index==current_index-1) {
@@ -209,7 +209,7 @@ class Play extends Component{
 			{content}
 			<div style={{height:'1rem',width:'9.4rem',padding:'0.3rem',display:'flex',flexDirection:'row',alignItems:'center',justifyContent:'space-between',position:'relative'}}>
 				<span style={{fontSize:'0.4rem',color:'#fff'}}>{formatTime(this.props.progress.currentTime)}</span>
-				<input type='range' min={0} max={1} step='any' value={this.props.progress.percentage || '0'} style={{ width:'7rem',height:'1rem',background:'#fff'}} onChange={this.onChange.bind(this)}/>
+				<input type='range' min={0} max={1} step='any' value={this.props.progress.percentage || '0'} style={{ width:'7rem'}} onChange={this.onChange.bind(this)}/>
 				<span style={{fontSize:'0.4rem',color:'#fff'}}>{formatTime(data.timeLength)}</span>
 			</div>
 			<div style={{height:'1rem',width:'9.4rem',padding:'0.3rem',display:'flex',flexDirection:'row',alignItems:'center',justifyContent:'space-between'}}>

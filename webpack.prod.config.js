@@ -4,8 +4,8 @@ const OpenBrowserPlugin=require('open-browser-webpack-plugin');
 const HtmlWebpackPlugin = require('html-webpack-plugin');
 const ExtractTextPlugin = require("extract-text-webpack-plugin");   //引入对应插件
 module.exports = {
-  devtool: 'source-map',       //模式选择，这里选择原始代码，因为开发环境不需要去混淆代码。
-  mode: 'development',        //环境区分，是开发环境development还是生产环境production
+  // devtool: 'source-map',       //模式选择，这里选择原始代码，因为开发环境不需要去混淆代码。
+  mode: 'production',        //环境区分，是开发环境development还是生产环境production
   entry:{index:['./src/index.js']},   //入口文件
   output: {                  
     filename: '[name].js',    //输出文件
@@ -71,6 +71,6 @@ module.exports = {
     }),
     new webpack.HotModuleReplacementPlugin(),
     new webpack.NamedModulesPlugin(),    //当开启 HMR 的时候使用该插件会显示模块的相对路径
-    new OpenBrowserPlugin({url: 'http://localhost:8888'})
+    // new OpenBrowserPlugin({url: 'http://localhost:8888'})
   ]
 };

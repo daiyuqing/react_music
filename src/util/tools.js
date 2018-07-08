@@ -55,7 +55,7 @@ var formatTime=function(length){
 var formatLength=function(str){
 	if (typeof str==='string') {
 		let arr=str.split(':');
-		return arr[0]*60+arr[1];
+		return parseInt(arr[0])*60+parseInt(arr[1]);
 	}else{
 		return 0;
 	}
