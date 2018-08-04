@@ -110,6 +110,9 @@ class Singer extends Component{
 							index_text_color='#fff';
                         	index_bg_color='#f70';
                         }
+                        if (item.filename.length>40) {
+                            item.filename=item.filename.slice(0,40)+'...';
+                        }
                         return <div key={index}  style={{height:'1.5rem',width:'9.6rem',borderBottom:'0.02rem solid #ccc',display:'flex',alignItems:'center'}}>
 								<p style={{width:'0.6rem',height:'0.6rem',lineHeight:'0.6rem',fontSize:'0.4rem',color:index_text_color,textAlign:'center',borderRadius:'0.6rem',backgroundColor:index_bg_color}}>{index+1}</p>
                                 <p onClick={this.playSong.bind(this,item)} style={{width:'8rem',fontSize:'0.4rem',color:'#333',marginLeft:'0.3rem'}}>{item.filename}</p> 

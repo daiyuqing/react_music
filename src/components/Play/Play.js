@@ -204,7 +204,7 @@ class Play extends Component{
 			<div style={{height:'1rem',width:'10rem',paddingTop:'0.3rem'}}>
 				<i onClick={this.back.bind(this)} className="iconfont icon-left" style={{fontSize:'0.5rem',color:'#fff',marginLeft:'0.3rem'}}></i>
 			</div>
-			<h2 style={{height:'1rem',textAlign:'center',fontSize:'0.6rem',color:'#fff'}}>{data.songName}</h2>
+			<h2 style={{height:'1rem',lineHeight:'1rem',textAlign:'center',fontSize:'0.6rem',color:'#fff',overflow:'hidden'}}>{data.songName}</h2>
 			<p style={{height:'1rem',textAlign:'center',fontSize:'0.4rem',color:'#fff'}}>- {data.singerName} -</p>
 			{content}
 			<div style={{height:'1rem',width:'9.4rem',padding:'0.3rem',display:'flex',flexDirection:'row',alignItems:'center',justifyContent:'space-between',position:'relative'}}>

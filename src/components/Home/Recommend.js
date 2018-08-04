@@ -21,7 +21,7 @@ class Recommend extends Component{
                         let url=item.imgurl.replace('/{size}','');
                         let count=item.playcount/10000 ;
                         let path='/album/'+item.specialid;
-                        return (<div key={item.specialid} style={{width:'3rem',marginLeft:'0.25rem',marginTop:'0.25rem',position:'relative'}}>
+                        return (<div key={index} style={{width:'3rem',marginLeft:'0.25rem',marginTop:'0.25rem',position:'relative'}}>
                             <Link to={path}>
                                 <img src={url} style={{height:'3rem',width:'3rem'}}/>
                                 <p style={{color:'#666666',fontSize:'0.3rem'}}>{item.specialname}</p>
