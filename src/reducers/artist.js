@@ -1,7 +1,7 @@
 
 'use strict';
 
-import * as actions from '.././actions/artist.js';
+import * as actions from 'actions/artist.js';
 
 const initState = {
     singerClass:[]

@@ -1,9 +1,9 @@
 import React, {Component} from 'react';
-import * as actions from '../.././actions/artist.js';
-import Header from '../.././components/common/Header.js';
-import Nav from '../.././components/common/Nav.js';
-import Loading from '../.././components/common/Loading.js';
-import {IsEmpty} from '../.././util/tools.js';
+import * as actions from 'actions/artist.js';
+import Header from 'components/common/Header.js';
+import Nav from 'components/common/Nav.js';
+import Loading from 'components/common/Loading.js';
+import {IsEmpty} from 'util/tools.js';
 import {Link} from 'react-router-dom';
 class Singer extends Component{
 	constructor(){

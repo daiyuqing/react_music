@@ -1,21 +1,21 @@
 import React, {Component} from 'react';
 import { HashRouter, Route, hashHistory, Switch } from 'react-router-dom';
-import Home from '.././containers/Home/index.js';
-import Artist from '.././containers/Artist/Artist.js';
-import ArtistList from '.././containers/Artist/ArtistList.js';
-import Singer from '.././containers/Artist/Singer.js';
-import New from '.././containers/New/index.js';
-import Rank from '.././containers/Rank/Rank.js';
-import AlbumList from '.././components/Home/AlbumList.js';
-import Album from '.././components/Home/Album.js';
-import Play from '.././containers/Play/Play.js';
-import Login from '.././containers/User/Login.js';
-import Center from '.././containers/User/Center.js';
-import Love from '.././containers/User/Love.js';
-import RankList from '.././components/Rank/RankList.js';
-import Search from '.././containers/Search/Search.js';
-import SearchResult from '.././containers/Search/SearchResult.js';
-import Player from '.././containers/Play/Player.js';
+import Home from 'containers/Home/index.js';
+import Artist from 'containers/Artist/Artist.js';
+import ArtistList from 'containers/Artist/ArtistList.js';
+import Singer from 'containers/Artist/Singer.js';
+import New from 'containers/New/index.js';
+import Rank from 'containers/Rank/Rank.js';
+import AlbumList from 'components/Home/AlbumList.js';
+import Album from 'components/Home/Album.js';
+import Play from 'containers/Play/Play.js';
+import Login from 'containers/User/Login.js';
+import Center from 'containers/User/Center.js';
+import Love from 'containers/User/Love.js';
+import RankList from 'components/Rank/RankList.js';
+import Search from 'containers/Search/Search.js';
+import SearchResult from 'containers/Search/SearchResult.js';
+import Player from 'containers/Play/Player.js';
 const routes=()=>{
 	return <div>
 		<Player/>

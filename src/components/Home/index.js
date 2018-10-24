@@ -1,10 +1,10 @@
 import React, {Component} from 'react';
 import { connect } from 'react-redux';
 import { bindActionCreators } from 'redux';
-import * as actions from '../.././actions/music.js';
-import Header from '../.././components/common/Header.js';
-import Nav from '../.././components/common/Nav.js';
-import Recommend from '../.././components/Home/Recommend.js';
+import * as actions from 'actions/music.js';
+import Header from 'components/common/Header.js';
+import Nav from 'components/common/Nav.js';
+import Recommend from 'components/Home/Recommend.js';
 
 class Home extends Component{
 	constructor(){

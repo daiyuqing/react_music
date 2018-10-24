@@ -38,7 +38,7 @@ const styles={
 		boxSizing:'border-box'
 	},
 	nav_item_inactive:{
-		width:'1.6rem',
+		width:'1.8rem',
 		height:'1.1rem',
 		lineHeight:'1.1rem',
 		fontSize:'0.4rem',
@@ -47,7 +47,7 @@ const styles={
 		padding:'0 0.2rem'
 	},
 	nav_item_active:{
-		width:'1.6rem',
+		width:'1.8rem',
 		height:'1.1rem',
 		lineHeight:'1.1rem',
 		fontSize:'0.4rem',

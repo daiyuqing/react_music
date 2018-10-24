@@ -1,8 +1,8 @@
 
 import { connect } from 'react-redux';
 import { bindActionCreators } from 'redux';
-import * as actions from '../.././actions/artist.js';
-import ArtistList from '../.././components/Artist/ArtistList.js';
+import * as actions from 'actions/artist.js';
+import ArtistList from 'components/Artist/ArtistList.js';
 
 
 export default connect(

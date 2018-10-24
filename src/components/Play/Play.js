@@ -3,9 +3,9 @@
 */
 
 import React, { Component } from 'react';
-import {IsEmpty,formatTime,formatLength} from '../.././util/tools.js';
-import Loading from '../.././components/common/Loading.js';
-import * as actions from '../.././actions/music.js';
+import {IsEmpty,formatTime,formatLength} from 'util/tools.js';
+import Loading from 'components/common/Loading.js';
+import * as actions from 'actions/music.js';
 class Play extends Component{
 	constructor(){
 		super();

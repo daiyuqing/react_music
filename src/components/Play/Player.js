@@ -4,7 +4,7 @@
 
 import React, { Component } from 'react'
 import ReactPlayer from 'react-player'
-import * as actions from '../.././actions/music.js';
+import * as actions from 'actions/music.js';
 class Player extends Component{
 	constructor(){
 		super();

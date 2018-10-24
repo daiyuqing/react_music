@@ -2,11 +2,11 @@ import React, {Component} from 'react';
 import { connect } from 'react-redux';
 import { bindActionCreators } from 'redux';
 import {Link} from 'react-router-dom';
-import * as actions from '../.././actions/rank.js';
-import Header from '../.././components/common/Header.js';
-import Nav from '../.././components/common/Nav.js';
-import Loading from '../.././components/common/Loading.js';
-import {IsEmpty} from '../.././util/tools.js';
+import * as actions from 'actions/rank.js';
+import Header from 'components/common/Header.js';
+import Nav from 'components/common/Nav.js';
+import Loading from 'components/common/Loading.js';
+import {IsEmpty} from 'util/tools.js';
 class Rank extends Component{
 	constructor(){
         super();

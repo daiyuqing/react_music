@@ -12,6 +12,16 @@ module.exports = {
     hashDigestLength: 7,   //hash值设置
     path: path.resolve(__dirname, 'build')         //输出文件路径
   },
+  resolve:{
+      alias:{
+          containers:path.resolve(__dirname, 'src/containers/'),
+          components: path.resolve(__dirname, 'src/components/'),
+          actions: path.resolve(__dirname, 'src/actions/'),
+          reducers: path.resolve(__dirname, 'src/reducers/'),
+          util: path.resolve(__dirname, 'src/util/'),
+          static:path.resolve(__dirname, 'src/static/')
+      }
+  },
   module: {
     rules: [
       {

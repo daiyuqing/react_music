@@ -1,8 +1,8 @@
 
 import { connect } from 'react-redux';
 import { bindActionCreators } from 'redux';
-import * as actions from '../.././actions/rank.js';
-import Rank from '../.././components/Rank/Rank.js';
+import * as actions from 'actions/rank.js';
+import Rank from 'components/Rank/Rank.js';
 
 
 

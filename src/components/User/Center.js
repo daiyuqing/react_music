@@ -6,9 +6,9 @@ import React, { Component } from 'react';
 import {Link} from 'react-router-dom';
 import { connect } from 'react-redux';
 import { bindActionCreators } from 'redux';
-import * as actions from '../.././actions/music.js';
-import {IsEmpty} from '../.././util/tools.js';
-import girl from '../.././static/images/girl.jpg';
+import * as actions from 'actions/music.js';
+import {IsEmpty} from 'util/tools.js';
+import girl from 'static/images/girl.jpg';
 class Center extends Component{
     constructor(){
         super();

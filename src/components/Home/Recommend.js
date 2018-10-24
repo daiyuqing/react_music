@@ -1,8 +1,8 @@
 import React, { Component } from 'react';
 import {Link} from 'react-router-dom';
-import Loading from '../.././components/common/Loading.js';
-import {IsEmpty} from '../.././util/tools.js';
-import Carousel from '../.././components/Home/Carousel.js';
+import Loading from 'components/common/Loading.js';
+import {IsEmpty} from 'util/tools.js';
+import Carousel from 'components/Home/Carousel.js';
 class Recommend extends Component{
     render() {
         if (IsEmpty(this.props.plist)) {
