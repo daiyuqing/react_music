@@ -11,6 +11,8 @@
   "author": "",
   "license": "ISC",
   "dependencies": {
+    "element-react": "^1.4.24",
+    "element-theme-default": "^1.4.13",
     "express": "^4.16.3",
     "react": "^16.3.2",
     "react-dom": "^16.3.2",

@@ -2,8 +2,6 @@ import React, {Component} from 'react';
 import { connect } from 'react-redux';
 import { bindActionCreators } from 'redux';
 import * as actions from 'actions/music.js';
-import Header from 'components/common/Header.js';
-import Nav from 'components/common/Nav.js';
 import Recommend from 'components/Home/Recommend.js';
 
 class Home extends Component{
@@ -41,11 +39,7 @@ class Home extends Component{
         }
     }
 	render(){
-		return(<div>
-				<Header playing={this.props.playing}/>
-				<Nav page='home'/>
-				<Recommend plist={this.props.plist} banner={this.props.banner} new_song={this.props.new_song}/>
-			</div>)
+        return <Recommend plist={this.props.plist} banner={this.props.banner} new_song={this.props.new_song}/>
 	}
 }
 

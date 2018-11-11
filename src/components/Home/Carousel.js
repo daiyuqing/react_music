@@ -1,16 +1,22 @@
 import React, { Component } from 'react';
-import ReactSwipe from 'react-swipe';
-class Carousel extends Component{
+import { Carousel } from 'element-react';
+class Carousels extends Component{
      render() {
         return (
-            <ReactSwipe className="carousel" swipeOptions={{continuous: false,auto: 2000}}>
-                {this.props.banner.map((item,index)=>{
-                    return <div key={index}>
-                        <img src={item.imgurl} style={{width:'10rem',height:'4rem'}} alt=""/>
-                    </div>
-                })}
-            </ReactSwipe>
-        );
+            <div>
+                <Carousel>
+                    {
+                      this.props.banner.map((item, index) => {
+                        return (
+                            <Carousel.Item key={index}>
+                                <img src={item.imgurl} style={{width:'10rem',height:'4rem'}} alt=""/>
+                            </Carousel.Item>
+                        )
+                      })
+                    }
+                </Carousel>
+            </div>
+        )
     }
 }
-export default Carousel;
+export default Carousels;

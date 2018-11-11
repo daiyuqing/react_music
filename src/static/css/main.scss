@@ -54,3 +54,29 @@
         transform: rotate(360deg);
     }
 }
+.el-tabs__item{
+    width: 2.5rem;
+    text-align: center;
+    height: 1rem;
+    font-size: 0.4rem;
+    line-height: 1rem;
+    color:#333;
+}
+.el-tabs__item.is-active{
+    color:#e9203d;
+    border-bottom-color: #e9203d!important;
+}
+.el-slider__runway{
+    height: 0.1rem;
+    background-color: #fff;
+}
+.el-slider__button{
+    width: 0.4rem;
+    height: 0.4rem;
+    background-color:  #e9203d;
+    border-radius: 50%;
+}
+.el-slider__bar{
+    background-color:  #e9203d;
+    height: 0.1rem;
+}

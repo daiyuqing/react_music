@@ -27,11 +27,10 @@ class Artist extends Component{
         }
     }
 	render(){
-		let content=null;
         if (IsEmpty(this.props.singerClass)) {
-            content=(<Loading/>) ;
+            return(<Loading/>) ;
         }else{
-            content=(<div style={{width:'10rem',padding:'0.3rem'}}>
+            return(<div style={{width:'10rem',padding:'0.3rem'}}>
 					{this.props.singerClass.map((item,index)=>{
 						let marginBottom;
 						if (index%3==0) {
@@ -48,11 +47,6 @@ class Artist extends Component{
 					})}
 				</div>);
         }
-		return(<div>
-				<Header/>
-				<Nav page='artist'/>
-				{content}
-			</div>)
 	}
 }
 export default Artist;

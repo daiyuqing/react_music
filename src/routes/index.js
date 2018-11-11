@@ -16,12 +16,13 @@ import RankList from 'components/Rank/RankList.js';
 import Search from 'containers/Search/Search.js';
 import SearchResult from 'containers/Search/SearchResult.js';
 import Player from 'containers/Play/Player.js';
+import Nav from 'components/common/Nav.js';
 const routes=()=>{
 	return <div>
 		<Player/>
 		<HashRouter history={hashHistory}>
 			<Switch>
-			  <Route exact path='/' component={Home}/>
+			  <Route exact path='/' component={Nav}/>
 			  <Route path='/artist' exact component={Artist}/>
 			  <Route path='/artist/list/:classid' exact component={ArtistList}/>
 			  <Route path='/artist/list/singer/:singerid' component={Singer}/>

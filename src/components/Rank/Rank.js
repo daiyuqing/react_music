@@ -3,8 +3,6 @@ import { connect } from 'react-redux';
 import { bindActionCreators } from 'redux';
 import {Link} from 'react-router-dom';
 import * as actions from 'actions/rank.js';
-import Header from 'components/common/Header.js';
-import Nav from 'components/common/Nav.js';
 import Loading from 'components/common/Loading.js';
 import {IsEmpty} from 'util/tools.js';
 class Rank extends Component{
@@ -26,11 +24,10 @@ class Rank extends Component{
         }
     }
 	render(){
-		let content=null;
 		if (IsEmpty(this.props.rankData)) {
-            content=(<Loading/>);
+            return(<Loading/>);
         }else{
-        	content=(<div style={{width:'10rem',padding:'0 0.3rem'}}>
+        	return(<div style={{width:'10rem',padding:'0 0.3rem'}}>
 					{this.props.rankData.map((item,index)=>{
 						let url=item.imgurl.replace('/{size}','');
 						return (<Link key={item.rankid} to={'/rank/list/'+item.rankid}>
@@ -43,11 +40,6 @@ class Rank extends Component{
 					})}
 				</div>);
         }
-		return(<div>
-				<Header/>
-				<Nav page='rank'/>
-				{content}
-			</div>)
 	}
 }
 

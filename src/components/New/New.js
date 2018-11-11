@@ -1,9 +1,8 @@
 import React, {Component} from 'react';
 import * as actions from 'actions/music.js';
-import Header from 'components/common/Header.js';
-import Nav from 'components/common/Nav.js';
 import Loading from 'components/common/Loading.js';
 import {IsEmpty} from 'util/tools.js';
+
 class New extends Component{
 	constructor(){
         super();
@@ -49,11 +48,10 @@ class New extends Component{
         location.href='#/play/'+item.hash;
     }
 	render(){
-        let content=null;
         if (IsEmpty(this.props.new_song)) {
-            content=(<Loading/>) ;
+            return <Loading/>
         }else{
-            content=(<div style={{width:'10rem',padding:'0.25rem'}}>
+            return(<div style={{width:'10rem',padding:'0.25rem'}}>
                     {this.props.new_song.map((item,index)=>{
                         let color='#ccc';
                         if (this.state.collection.indexOf(item.hash)>-1) {
@@ -66,11 +64,6 @@ class New extends Component{
                     })}
                 </div>);
         }
-		return(<div>
-				<Header/>
-				<Nav page='new'/>
-				{content}
-			</div>)
 	}
 }
 

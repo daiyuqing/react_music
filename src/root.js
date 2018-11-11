@@ -4,6 +4,7 @@ import {Provider} from 'react-redux';
 import createStore from './store/index';
 import Routes from './routes/index.js';
 import rootReducer from './reducers/index.js';
+import 'element-theme-default';
 import './static/css/main.scss';
 let store=createStore(rootReducer);
 const Root=()=>(

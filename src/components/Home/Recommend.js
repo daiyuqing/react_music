@@ -2,7 +2,7 @@ import React, { Component } from 'react';
 import {Link} from 'react-router-dom';
 import Loading from 'components/common/Loading.js';
 import {IsEmpty} from 'util/tools.js';
-import Carousel from 'components/Home/Carousel.js';
+import Carousels from 'components/Home/Carousel.js';
 class Recommend extends Component{
     render() {
         if (IsEmpty(this.props.plist)) {
@@ -10,7 +10,7 @@ class Recommend extends Component{
         }
         return (
             <div style={{width:'10rem'}}>
-                <Carousel banner={this.props.banner}/>
+                <Carousels banner={this.props.banner}/>
                 <div style={{width:'9.5rem',height:'1.2rem',display:'flex',justifyContent:'space-between',alignItems:'center',borderBottom:'0.02rem solid #cccccc',margin:'0 0.25rem',boxSizing:'border-box'}}>
                     <span style={{color:'#666666',fontSize:'0.4rem'}}>推荐歌单</span>
                     <Link to='/albumList'><i className="iconfont icon-previewright" style={{fontSize:'0.5rem',color:'#666666'}}></i></Link>
@@ -38,7 +38,5 @@ class Recommend extends Component{
         );
     }
 }
-const styles={
-    
-}
+
 export default Recommend;
