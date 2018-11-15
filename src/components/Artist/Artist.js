@@ -5,6 +5,7 @@ import Nav from 'components/common/Nav.js';
 import Loading from 'components/common/Loading.js';
 import {IsEmpty} from 'util/tools.js';
 import {Link} from 'react-router-dom';
+
 class Artist extends Component{
 	constructor(){
         super();

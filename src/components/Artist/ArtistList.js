@@ -10,6 +10,7 @@ import { bindActionCreators } from 'redux';
 import * as actions from 'actions/music.js';
 import {IsEmpty,getLocalTime} from 'util/tools.js';
 import Loading from 'components/common/Loading.js';
+import { Layout } from 'element-react';
 
 class ArtistList extends Component{
     constructor(){
@@ -42,12 +43,14 @@ class ArtistList extends Component{
 		
         return (
             <div style={{width:'10rem'}}>
-                <div style={{width:'10rem',height:'1.3rem',display:'flex',alignItems:'center',background:'#e9203d',boxSizing:'border-box'}}>
-                    <Link to='/artist'>
-                        <i className="iconfont icon-left" style={{fontSize:'0.5rem',color:'#fff',marginLeft:'0.2rem'}}></i>
-                    </Link>
-                    <span style={{color:'#fff',fontSize:'0.4rem',marginLeft:'3.4rem'}}>{this.state.artistList.classname}</span>
-                </div>
+                <Layout.Row type="flex"  align="middle"  style={{height:'1.2rem',background:'#e9203d'}}>
+                    <Layout.Col span="2" offset="1">
+                        <Link to='/'><i className="iconfont icon-left" style={{fontSize:'0.5rem',color:'#fff'}}></i></Link>
+                    </Layout.Col>
+                    <Layout.Col span="18">
+                        <p style={{color:'#fff',fontSize:'0.4rem',textAlign:'center'}}>{this.state.artistList.classname}</p>
+                    </Layout.Col>
+                </Layout.Row>
                 {this.state.artistList.singers.list.info.map((item,index)=>{
                     let imgurl=item.imgurl.replace('{size}',400);
                     return <Link to={'/artist/list/singer/'+item.singerid} key={item.singerid}><div style={{height:'2rem',display:'flex',alignItems:'center',width:'9.6rem',margin:'0 0.2rem',borderBottom:'0.01rem solid #ccc'}}>

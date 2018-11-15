@@ -9,6 +9,7 @@ import { bindActionCreators } from 'redux';
 import * as actions from 'actions/music.js';
 import {IsEmpty} from 'util/tools.js';
 import girl from 'static/images/girl.jpg';
+import { Layout } from 'element-react';
 class Center extends Component{
     constructor(){
         super();
@@ -28,10 +29,14 @@ class Center extends Component{
     render() {
         return (
             <div style={{width:'10rem'}}>
-                <div style={{width:'10rem',height:'1.3rem',display:'flex',alignItems:'center',background:'#e9203d',boxSizing:'border-box'}}>
-                    <Link to='/user/login'><i className="iconfont icon-left" style={{fontSize:'0.5rem',color:'#fff',marginLeft:'0.2rem'}}></i></Link>
-                    <span style={{color:'#fff',fontSize:'0.4rem',marginLeft:'3.2rem'}}>个人中心</span>
-                </div>
+                <Layout.Row type="flex"  align="middle"  style={{height:'1.2rem',background:'#e9203d'}}>
+                    <Layout.Col span="2" offset="1">
+                        <Link to='/user/login'><i className="iconfont icon-left" style={{fontSize:'0.5rem',color:'#fff'}}></i></Link>
+                    </Layout.Col>
+                    <Layout.Col span="18">
+                        <p style={{color:'#fff',fontSize:'0.4rem',textAlign:'center'}}>个人中心</p>
+                    </Layout.Col>
+                </Layout.Row>
                 <div style={{display:'flex',flexDirection:'column',alignItems:'center',marginTop:'2.5rem'}}>
 	                <img src={girl} style={{width:'5rem',height:'5rem',borderRadius:'5rem',marginBottom:'0.5rem'}} alt=""/>
 	                <p style={{fontSize:'0.4rem',color:'#333'}}>当前用户：{this.state.username}</p>

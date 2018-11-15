@@ -8,6 +8,8 @@ import { connect } from 'react-redux';
 import { bindActionCreators } from 'redux';
 import * as actions from 'actions/music.js';
 import {IsEmpty} from 'util/tools.js';
+import { Layout } from 'element-react';
+
 class Login extends Component{
     constructor(){
         super();
@@ -54,10 +56,14 @@ class Login extends Component{
     render() {
         return (
             <div style={{width:'10rem'}}>
-                <div style={{width:'10rem',height:'1.3rem',display:'flex',alignItems:'center',background:'#e9203d',boxSizing:'border-box'}}>
-                    <Link to='/'><i className="iconfont icon-left" style={{fontSize:'0.5rem',color:'#fff',marginLeft:'0.2rem'}}></i></Link>
-                    <span style={{color:'#fff',fontSize:'0.4rem',marginLeft:'3.8rem'}}>登陆</span>
-                </div>
+                <Layout.Row type="flex"  align="middle"  style={{height:'1.2rem',background:'#e9203d'}}>
+                    <Layout.Col span="2" offset="1">
+                        <Link to='/'><i className="iconfont icon-left" style={{fontSize:'0.5rem',color:'#fff'}}></i></Link>
+                    </Layout.Col>
+                    <Layout.Col span="18">
+                        <p style={{color:'#fff',fontSize:'0.4rem',textAlign:'center'}}>登陆</p>
+                    </Layout.Col>
+                </Layout.Row>
                 <div style={{display:'flex',flexDirection:'column',alignItems:'center',marginTop:'4rem'}}>
                     <i className="iconfont icon-music" style={{fontSize:'3rem',color:'#e9203d'}}></i>
                     <div style={{display:'flex',alignItems:'center',width:'8.5rem',height:'1.2rem',borderRadius:'1.6rem',marginTop:'0.6rem',border:'0.03rem solid #ccc'}}>

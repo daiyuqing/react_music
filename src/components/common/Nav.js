@@ -10,7 +10,7 @@ import Header from 'components/common/Header.js';
 class Nav extends Component{
 	render(){
 		return (
-			<div>
+			<div style={{width:'10rem'}}>
 				<Header/>
 			    <Tabs activeName="1">
 			        <Tabs.Pane label="个性推荐" name="1">

@@ -8,6 +8,7 @@ import { connect } from 'react-redux';
 import { bindActionCreators } from 'redux';
 import * as actions from 'actions/music.js';
 import Loading from 'components/common/Loading.js';
+import { Layout } from 'element-react';
 class Album extends Component{
     constructor(){
         super();
@@ -91,10 +92,14 @@ class Album extends Component{
         let imgurl=info.imgurl.replace('/{size}','');
         return (
             <div style={{width:'10rem'}}>
-                <div style={{width:'10rem',height:'1.3rem',display:'flex',alignItems:'center',background:'#e9203d',boxSizing:'border-box'}}>
-                    <Link to='/'><i className="iconfont icon-left" style={{fontSize:'0.5rem',color:'#fff',marginLeft:'0.2rem'}}></i></Link>
-                    <span style={{color:'#fff',fontSize:'0.4rem',marginLeft:'3.8rem'}}>歌单</span>
-                </div>
+                <Layout.Row type="flex"  align="middle"  style={{height:'1.2rem',background:'#e9203d'}}>
+                    <Layout.Col span="2" offset="1">
+                        <Link to='/'><i className="iconfont icon-left" style={{fontSize:'0.5rem',color:'#fff'}}></i></Link>
+                    </Layout.Col>
+                    <Layout.Col span="18">
+                        <p style={{color:'#fff',fontSize:'0.4rem',textAlign:'center'}}>歌单</p>
+                    </Layout.Col>
+                </Layout.Row>
                 <div style={{background:'#ccc',borderBottom:'0.04rem solid #e9203d'}}>
                     <div style={{width:'10rem',display:'flex',height:'4.2rem',alignItems:'center'}}>
                         <img src={imgurl} style={{width:'3.6rem',height:'3.6rem',marginLeft:'0.3rem'}} alt=""/>

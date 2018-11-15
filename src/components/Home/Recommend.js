@@ -2,7 +2,8 @@ import React, { Component } from 'react';
 import {Link} from 'react-router-dom';
 import Loading from 'components/common/Loading.js';
 import {IsEmpty} from 'util/tools.js';
-import Carousels from 'components/Home/Carousel.js';
+import Carousel from 'components/Home/Carousel.js';
+import { Layout } from 'element-react';
 class Recommend extends Component{
     render() {
         if (IsEmpty(this.props.plist)) {
@@ -10,11 +11,15 @@ class Recommend extends Component{
         }
         return (
             <div style={{width:'10rem'}}>
-                <Carousels banner={this.props.banner}/>
-                <div style={{width:'9.5rem',height:'1.2rem',display:'flex',justifyContent:'space-between',alignItems:'center',borderBottom:'0.02rem solid #cccccc',margin:'0 0.25rem',boxSizing:'border-box'}}>
-                    <span style={{color:'#666666',fontSize:'0.4rem'}}>推荐歌单</span>
-                    <Link to='/albumList'><i className="iconfont icon-previewright" style={{fontSize:'0.5rem',color:'#666666'}}></i></Link>
-                </div>
+                <Carousel banner={this.props.banner}/>
+                <Layout.Row type="flex"  align="middle"  style={{height:'1.2rem',borderBottom:'0.01rem solid #cccccc'}}>
+                    <Layout.Col span="22" offset="1">
+                        <span style={{color:'#333',fontSize:'0.4rem'}}>推荐歌单</span>
+                    </Layout.Col>
+                    <Layout.Col span="2">
+                        <Link to='/albumList'><i className="iconfont icon-previewright" style={{fontSize:'0.5rem',color:'#666666'}}></i></Link>
+                    </Layout.Col>
+                </Layout.Row>
                 <div style={{width:'10rem',display:'flex',flexWrap:'wrap'}}>
                     {this.props.plist.map((item,index)=>{
                         if (index>8) {return}

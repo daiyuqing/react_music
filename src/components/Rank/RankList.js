@@ -10,6 +10,7 @@ import { bindActionCreators } from 'redux';
 import * as actions from 'actions/music.js';
 import {IsEmpty,getLocalTime} from 'util/tools.js';
 import Loading from 'components/common/Loading.js';
+import { Layout } from 'element-react';
 class RankList extends Component{
     constructor(){
         super();
@@ -87,12 +88,14 @@ class RankList extends Component{
 		let imgurl=this.state.rankList.info.bannerurl.replace('{size}','400');
         return (
             <div style={{width:'10rem'}}>
-                <div style={{width:'10rem',height:'1.3rem',display:'flex',alignItems:'center',background:'#e9203d',boxSizing:'border-box'}}>
-                    <Link to='/rank'>
-                        <i className="iconfont icon-left" style={{fontSize:'0.5rem',color:'#fff',marginLeft:'0.2rem'}}></i>
-                    </Link>
-                    <span style={{color:'#fff',fontSize:'0.4rem',marginLeft:'3.4rem'}}>{this.state.rankList.info.rankname}</span>
-                </div>
+                <Layout.Row type="flex"  align="middle"  style={{height:'1.2rem',background:'#e9203d'}}>
+                    <Layout.Col span="2" offset="1">
+                        <Link to='/'><i className="iconfont icon-left" style={{fontSize:'0.5rem',color:'#fff'}}></i></Link>
+                    </Layout.Col>
+                    <Layout.Col span="18">
+                        <p style={{color:'#fff',fontSize:'0.4rem',textAlign:'center'}}>{this.state.rankList.info.rankname}</p>
+                    </Layout.Col>
+                </Layout.Row>
                 <img src={imgurl} style={{width:'10rem',height:'4rem'}} alt=""/>
                 <p style={{color:'#fff',fontSize:'0.4rem',marginTop:'-1rem',marginLeft:'4rem',height:'1rem',lineHeight:'1rem'}}>更新时间：{getLocalTime(this.state.rankList.songs.timestamp)}  </p>
                 <div style={{width:'9.4rem',display:'flex',height:'1.4rem',alignItems:'center',justifyContent:'space-between',padding:'0 0.3rem',borderBottom:'0.02rem solid #e9203d'}}>
