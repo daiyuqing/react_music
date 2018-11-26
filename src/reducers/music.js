@@ -14,13 +14,17 @@ const initState = {
     volumeObj:0.5,
     hash:'',
     currentMusic:{},
-    krc:''
+    krc:'',
+    tabIndex:'1'
 };
 
 
 //展示歌单和播放歌单
 export default (state=initState,action)=>{
 	switch(action.type){
+        case 'UPDATE_TABINDEX':
+            return Object.assign({},state, action.data);
+            break;
 		case 'UPDATE_NEW_SONG':
 			return Object.assign({},state,{
                 new_song: action.data.new_song

@@ -23,7 +23,6 @@ class Singer extends Component{
         try{
             fetch('/kugou/singer/info/'+this.props.match.params.singerid+'&json=true/').then( (res) => res.json()).then(
                 (result)=>{
-                    console.log(result);
                     this.setState({
                     	singerInfo:result
                     });

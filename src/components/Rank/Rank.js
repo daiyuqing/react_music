@@ -13,7 +13,6 @@ class Rank extends Component{
         try{
             fetch('/kugou/rank/list&json=true').then( (res) => res.json()).then(
                 (result)=>{
-                    console.log(result.rank.list);
                     this.props.actions.update_rank(result.rank.list);
                 },(error)=>{
                     console.log(error);

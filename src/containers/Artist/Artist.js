@@ -6,7 +6,11 @@ import Artist from 'components/Artist/Artist.js';
 
 
 export default connect(
-  (state)=>state.Artist,
+    (state)=>{
+		return {
+			singerClass:state.Artist.singerClass
+		}
+	},
     (dispatch)=>({
         actions:bindActionCreators(actions, dispatch)
     })

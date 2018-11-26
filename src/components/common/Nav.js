@@ -11,8 +11,8 @@ class Nav extends Component{
 	render(){
 		return (
 			<div style={{width:'10rem'}}>
-				<Header/>
-			    <Tabs activeName="1">
+				<Header playing={this.props.playing}/>
+			    <Tabs activeName={this.props.tabIndex} onTabClick={ (tab) => this.props.actions.update_tabIndex(tab.props.name) }>
 			        <Tabs.Pane label="个性推荐" name="1">
 			        	<Home/>
 			        </Tabs.Pane>

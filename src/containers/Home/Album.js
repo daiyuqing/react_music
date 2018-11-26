@@ -1,18 +1,16 @@
-
+import React, {Component} from 'react';
 import { connect } from 'react-redux';
 import { bindActionCreators } from 'redux';
-import * as actions from 'actions/rank.js';
-import Rank from 'components/Rank/Rank.js';
-
-
-
+import * as actions from 'actions/music.js';
+import Album from 'components/Home/Album.js';
 export default connect(
     (state)=>{
     	return {
-    		rankData:state.Rank.rankData
+    		album:state.Music.album,
+    		play_list:state.Music.play_list,
     	}
     },
     (dispatch)=>({
         actions:bindActionCreators(actions, dispatch)
     })
-)(Rank);
+)(Album);

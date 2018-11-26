@@ -4,8 +4,6 @@
 */
 import React, { Component } from 'react';
 import {Link} from 'react-router-dom';
-import { connect } from 'react-redux';
-import { bindActionCreators } from 'redux';
 import * as actions from 'actions/music.js';
 import Loading from 'components/common/Loading.js';
 import { Layout } from 'element-react';
@@ -25,18 +23,7 @@ class Album extends Component{
         }
         if (this.props.match.params.id) {
             let id=this.props.match.params.id;
-            try{
-                fetch('/kugou/plist/list/'+id+'?json=true').then( (res) => res.json()).then(
-                    (result)=>{
-                       console.log(result);
-                       this.props.actions.update_album(result);
-                    },(error)=>{
-                        console.log(error);
-                    }
-                );
-            }catch(e){
-                
-            }
+            this.props.actions.get_plist_by_id(id);
         }else{
             location.href='./home';
             return;
@@ -83,7 +70,6 @@ class Album extends Component{
     }
 
     render() {
-        console.log(this.props)
         if (!this.props.album.info) {
             return <Loading/>
         }
@@ -137,9 +123,4 @@ const styles={
     
 }
 
-export default connect(
-    (state)=>state.Music,
-    (dispatch)=>({
-        actions:bindActionCreators(actions, dispatch)
-    })
-)(Album);
+export default Album;

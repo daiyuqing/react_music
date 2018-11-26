@@ -81,7 +81,7 @@ class Search extends Component{
 	            			color='#e9203d';
 	            			border_color='#e9203d';
 	            		}
-	            		return <p onClick={this.search.bind(this,item.keyword)} key={index} style={{display:'inline-block',padding:'0.3rem',border:'0.01rem solid '+border_color,borderRadius:'1rem',margin:'0.3rem 1rem 0rem 0rem',color:color,fontSize:'0.4rem'}}>{item.keyword}</p>
+	            		return <p onClick={this.search.bind(this,item.keyword)} key={index} style={{display:'inline-block',padding:'0.2rem 0.3rem',border:'0.01rem solid '+border_color,borderRadius:'1rem',margin:'0.3rem 1rem 0rem 0rem',color:color,fontSize:'0.4rem'}}>{item.keyword}</p>
 	            	})}
 	            	<div style={{borderBottom:'0.01rem solid #ccc',height:'1.2rem',lineHeight:'1.2rem',fontSize:'0.4rem',color:'#666',width:'9.4rem',display:'flex',justifyContent:'space-between'}}>
 			            <p style={{height:'1.2rem',lineHeight:'1.2rem',fontSize:'0.4rem',color:'#666'}}>搜索历史</p>
@@ -89,9 +89,9 @@ class Search extends Component{
 	            	</div>
 		            {this.state.search_history.map((item,index)=>{
 	            		return <div key={index} style={{borderBottom:'0.01rem solid #ccc',height:'1.2rem',lineHeight:'1.2rem',fontSize:'0.4rem',color:'#666',width:'9.4rem',display:'flex',justifyContent:'space-between'}}>
-			            <p onClick={this.clickHistory.bind(this,index)} style={{height:'1.2rem',lineHeight:'1.2rem',fontSize:'0.4rem',color:'#666',width:'8rem'}}>{item}</p>
-	            		<i onClick={this.delete.bind(this,index,item)} className="iconfont icon-close" style={{fontSize:'0.3rem',color:'#999'}}></i>
-	            	</div>
+				            <p onClick={this.clickHistory.bind(this,index)} style={{height:'1.2rem',lineHeight:'1.2rem',fontSize:'0.4rem',color:'#666',width:'8rem'}}>{item}</p>
+		            		<i onClick={this.delete.bind(this,index,item)} className="iconfont icon-close" style={{fontSize:'0.3rem',color:'#999'}}></i>
+		            	</div>
 	            	})}
 	            </div>
 			</div>

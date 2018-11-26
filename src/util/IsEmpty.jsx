@@ -1,6 +1,6 @@
 /**
  * 判断参数是否为空
- * @author Shitou
+ * @author dyq
  * @param {[type]} keys [description]
  */
 var IsEmpty = function(keys){

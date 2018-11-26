@@ -9,34 +9,8 @@ class Home extends Component{
         super();
     }
     componentWillMount(){
-        try{
-            fetch('/kugou/?json=true').then( (res) => res.json()).then(
-                (result)=>{
-                    let collection=localStorage.getItem('collection');
-                    let new_song=result.data;
-                    if (collection) {
-                        for(let i in new_song){
-                            if (collection.indexOf(new_song[i].audio_id)>-1) {
-                                new_song[i].collected=true;
-                            }
-                        }
-                    }
-					this.props.actions.update_new_song(new_song);
-					this.props.actions.update_banner(result.banner);
-                    fetch('/kugou/plist/index?json=true').then( (res) => res.json()).then(
-                        (result)=>{
-                            this.props.actions.update_plist(result.plist.list.info);
-                        },(error)=>{
-                            console.log(error);
-                        }
-                    );
-                },(error)=>{
-                    console.log(error);
-                }
-            );
-        }catch(e){
-            
-        }
+        this.props.actions.get_banner();
+        this.props.actions.get_plist();
     }
 	render(){
         return <Recommend plist={this.props.plist} banner={this.props.banner} new_song={this.props.new_song}/>

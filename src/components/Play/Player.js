@@ -1,5 +1,5 @@
 /**
-	音乐播放组件
+	音乐播放器
 */
 
 import React, { Component } from 'react'

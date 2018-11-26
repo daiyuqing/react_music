@@ -23,7 +23,6 @@ class ArtistList extends Component{
         try{
             fetch('/kugou/singer/list/'+this.props.match.params.classid+'?json=true').then( (res) => res.json()).then(
                 (result)=>{
-                    console.log(result);
                     this.setState({
                     	artistList:result
                     });
@@ -67,9 +66,4 @@ const styles={
     
 }
 
-export default connect(
-    (state)=>state.Music,
-    (dispatch)=>({
-        actions:bindActionCreators(actions, dispatch)
-    })
-)(ArtistList);
+export default ArtistList;

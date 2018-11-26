@@ -1,7 +1,5 @@
 import React, {Component} from 'react';
 import * as actions from 'actions/artist.js';
-import Header from 'components/common/Header.js';
-import Nav from 'components/common/Nav.js';
 import Loading from 'components/common/Loading.js';
 import {IsEmpty} from 'util/tools.js';
 import {Link} from 'react-router-dom';
@@ -14,18 +12,7 @@ class Artist extends Component{
         }
     }
     componentWillMount(){
-        try{
-            fetch('/kugou/singer/class&json=true').then( (res) => res.json()).then(
-                (result)=>{
-                    console.log(result);
-                    this.props.actions.update_singer_class(result.list);
-                },(error)=>{
-                    console.log(error);
-                }
-            );
-        }catch(e){
-            
-        }
+        this.props.actions.get_singer_class();
     }
 	render(){
         if (IsEmpty(this.props.singerClass)) {

@@ -8,7 +8,16 @@ import { bindActionCreators } from 'redux';
 import * as actions from 'actions/music.js';
 import Play from 'components/Play/Play.js';
 export default connect(
-  	(state)=>state.Music,
+  	(state)=>{
+  		return {
+  			play_list:state.Music.play_list,
+  			krc:state.Music.krc,
+  			audio:state.Music.audio,
+  			currentMusic:state.Music.currentMusic,
+  			progress:state.Music.progress,
+        play:state.Music.play,
+  		}
+  	},
     (dispatch)=>({
         actions:bindActionCreators(actions, dispatch)
     })

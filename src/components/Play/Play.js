@@ -174,18 +174,12 @@ class Play extends Component{
 			return <Loading/>;
 		}
 		let data=this.props.currentMusic;
-		let play_button=null;
-		if (this.props.playing) {
-			play_button=<i onClick={this.paused.bind(this,false)} className="iconfont icon-pause" style={{fontSize:'0.8rem',color:'#fff'}}></i>
-		}else{
-			play_button=<i onClick={this.paused.bind(this,true)} className="iconfont icon-play" style={{fontSize:'0.8rem',color:'#fff'}}></i>
-		}
+		let play_button=this.props.playing?"icon-pause":"icon-play";
 		let content=null;
 		if (this.state.show=='pic') {
 			content=<div onClick={this.changeContent.bind(this,'krc')} style={{flex:1}}>
 				<img  src={data.imgUrl.replace('{size}','400')} style={{width:'6rem',height:'6rem',borderRadius:'6rem',border:'0.2rem solid #fff',boxShadow:'0 0 0.4rem #000',margin:'2rem 0'}} className={this.props.playing?'rotate playing':'rotate paused'} alt=""/>
 			</div>
-			
 		}else{
 			let current_index=this.getPlayKrc();
 			content=<div onClick={this.changeContent.bind(this,'pic')} style={{height:'10rem',overflow:'hidden',flex:1}}>
@@ -215,7 +209,7 @@ class Play extends Component{
 			<div style={{height:'1rem',width:'9.4rem',padding:'0.3rem',display:'flex',flexDirection:'row',alignItems:'center',justifyContent:'space-between'}}>
 				<i className="iconfont icon-shunxubofang" style={{fontSize:'0.6rem',color:'#fff'}}></i>
 				<i onClick={this.prevSong.bind(this)} className="iconfont icon-prev" style={{fontSize:'0.6rem',color:'#fff'}}></i>
-				{play_button}
+				<i onClick={this.paused.bind(this,false)} className={"iconfont "+play_button} style={{fontSize:'0.8rem',color:'#fff'}}></i>
 				<i onClick={this.nextSong.bind(this)} className="iconfont icon-next" style={{fontSize:'0.6rem',color:'#fff'}}></i>
 				<i onClick={this.showList.bind(this)} className="iconfont icon-bofangliebiaoicon" style={{fontSize:'0.6rem',color:'#fff'}}></i>
 			</div>

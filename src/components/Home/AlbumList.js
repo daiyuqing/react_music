@@ -5,9 +5,7 @@
 */
 import React, { Component } from 'react';
 import {Link} from 'react-router-dom';
-import { connect } from 'react-redux';
-import { bindActionCreators } from 'redux';
-import * as actions from 'actions/music.js';
+
 class AlbumList extends Component{
     constructor(){
         super();
@@ -46,9 +44,4 @@ const styles={
     
 }
 
-export default connect(
-    (state)=>state.Music,
-    (dispatch)=>({
-        actions:bindActionCreators(actions, dispatch)
-    })
-)(AlbumList);
+export default AlbumList;
