@@ -5,6 +5,10 @@ import {IsEmpty} from 'util/tools.js';
 import Carousel from 'components/Home/Carousel.js';
 import { Layout } from 'element-react';
 class Recommend extends Component{
+    componentWillMount(){
+        this.props.actions.get_banner();
+        this.props.actions.get_plist();
+    }
     render() {
         if (IsEmpty(this.props.plist)) {
             return <Loading/>

@@ -2,7 +2,7 @@ import React, {Component} from 'react';
 import { connect } from 'react-redux';
 import { bindActionCreators } from 'redux';
 import * as actions from 'actions/music.js';
-import Home from 'components/Home/index.js';
+import Recommend from 'components/Home/Recommend.js';
 export default connect(
   	(state)=>{
   		return {
@@ -14,4 +14,4 @@ export default connect(
     (dispatch)=>({
         actions:bindActionCreators(actions, dispatch)
     })
-)(Home);
+)(Recommend);

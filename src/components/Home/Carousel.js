@@ -20,7 +20,7 @@ class Carousel extends Component{
                       this.props.banner.map((item, index) => {
                         return (
                             <div key={index}>
-                                <img src={item.imgurl} style={{width:'10rem'}} alt=""/>
+                                <img src={item.imgurl} style={{width:'10rem',height:'3.86rem'}} alt=""/>
                             </div>
                         )
                       })

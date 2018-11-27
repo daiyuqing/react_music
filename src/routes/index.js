@@ -1,6 +1,6 @@
 import React, {Component} from 'react';
 import { HashRouter, Route, hashHistory, Switch } from 'react-router-dom';
-import Home from 'containers/Home/index.js';
+import Recommend from 'containers/Home/Recommend.js';
 import Artist from 'containers/Artist/Artist.js';
 import ArtistList from 'components/Artist/ArtistList.js';
 import Singer from 'containers/Artist/Singer.js';
