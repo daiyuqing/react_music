@@ -123,13 +123,10 @@ function music_get_hash(rsp){
 	}
 }
 
-function music_control(rsp){
+function music_control(){
 	return (dispatch,getState)=>{
 		dispatch({
-			type:'MUSIC_CONTROL',
-			data:{
-				playing:rsp
-			}
+			type:'MUSIC_CONTROL'
 		});
 	}
 }

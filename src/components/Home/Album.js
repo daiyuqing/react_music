@@ -25,7 +25,7 @@ class Album extends Component{
             let id=this.props.match.params.id;
             this.props.actions.get_plist_by_id(id);
         }else{
-            location.href='./home';
+            this.props.history.push('/');
             return;
         }
     }
@@ -57,7 +57,7 @@ class Album extends Component{
         let hash=this.props.album.list.list.info[0].hash;
         this.props.actions.music_get_hash(hash);
         this.props.actions.music_control(true);
-        location.href='#/play/'+hash;
+        this.props.history.push('/play/'+hash);
     }
     //点击歌曲，加入歌单，跳到播放页面
     playSong(item){
@@ -66,7 +66,7 @@ class Album extends Component{
         this.props.actions.add_song(play_list);
         this.props.actions.music_get_hash(item.hash);
         this.props.actions.music_control(true);
-        location.href='#/play/'+item.hash;
+        this.props.history.push('/play/'+item.hash);
     }
 
     render() {

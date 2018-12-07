@@ -51,7 +51,7 @@ class Login extends Component{
         }
         localStorage.setItem('username',username);
         localStorage.setItem('password',password);
-        location.href='#/user/center';
+        this.props.history.push('/user/center');
     }
     render() {
         return (

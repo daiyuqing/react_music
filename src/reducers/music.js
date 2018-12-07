@@ -66,7 +66,7 @@ export default (state=initState,action)=>{
             break;
         // 播放控制
         case 'MUSIC_CONTROL':
-            return Object.assign({}, state, action.data);
+            return Object.assign({}, state, {playing:!state.playing});
            	break;
         // 播放进度
         case 'MUSIC_PLAYTIME':

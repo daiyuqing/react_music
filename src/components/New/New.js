@@ -45,7 +45,7 @@ class New extends Component{
         this.props.actions.add_song(play_list);
         this.props.actions.music_get_hash(item.hash);
         this.props.actions.music_control(true);
-        location.href='#/play/'+item.hash;
+        this.props.history.push('/play/'+item.hash);
     }
 	render(){
         if (IsEmpty(this.props.new_song)) {

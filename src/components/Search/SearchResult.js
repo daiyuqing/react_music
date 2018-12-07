@@ -46,7 +46,7 @@ class SearchResult extends Component{
         let hash=list[0].hash;
         this.props.actions.music_get_hash(hash);
         this.props.actions.music_control(true);
-        location.href='#/play/'+hash;
+        this.props.history.push('/play/'+hash);
     }
     //点击歌曲，加入歌单，跳到播放页面
     playSong(item){
@@ -55,7 +55,7 @@ class SearchResult extends Component{
         this.props.actions.add_song(play_list);
         this.props.actions.music_get_hash(item.hash);
         this.props.actions.music_control(true);
-        location.href='#/play/'+item.hash;
+        this.props.history.push('/play/'+item.hash);
     }
     collect(hash,filename,i){
         let collection=localStorage.getItem('collection');

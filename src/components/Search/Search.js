@@ -43,17 +43,16 @@ class Search extends Component{
     		this.state.search_history.push(keyword);
 			localStorage.setItem('search_history',JSON.stringify(this.state.search_history));
 			localStorage.setItem('search_history_index',this.state.search_history.length-1);
-			location.href='#/search/result';
     	}else if (this.refs.input.value) {
 			this.state.search_history.push(this.refs.input.value);
 			localStorage.setItem('search_history',JSON.stringify(this.state.search_history));
 			localStorage.setItem('search_history_index',this.state.search_history.length-1);
-			location.href='#/search/result';
     	}
+		this.props.history.push('/search/result');
     }
     clickHistory(i){
 		localStorage.setItem('search_history_index',i);
-		location.href='#/search/result';
+		this.props.history.push('/search/result');
     }
     clearHistory(){
     	localStorage.setItem('search_history','');

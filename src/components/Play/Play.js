@@ -34,12 +34,12 @@ class Play extends Component{
 	}
 
 	//设置播或暂停
-	paused(paused){
-		this.props.actions.music_control(paused);
+	paused(){
+		this.props.actions.music_control();
 	}
 	//返回
 	back(){
-		window.history.back();
+		this.props.history.goBack();
 	}
 	//改变中间显示的状态，歌词或歌手照片
 	changeContent(type){
@@ -85,13 +85,13 @@ class Play extends Component{
 	/*清空播放歌单*/
 	deleteAll(){
 		this.props.actions.add_song([]);
-		window.history.back();
+		this.props.history.goBack();
 	}
 	/*删除歌单某一首*/
 	delete(i,hash){
 		if (hash==this.props.match.params.hash) {
 			if (this.props.play_list.length==1) {
-				window.history.back();
+				this.props.history.goBack();
 			}else{
 				let new_hash='';
 				if (i==this.props.play_list.length-1) {
@@ -209,7 +209,7 @@ class Play extends Component{
 			<div style={{height:'1rem',width:'9.4rem',padding:'0.3rem',display:'flex',flexDirection:'row',alignItems:'center',justifyContent:'space-between'}}>
 				<i className="iconfont icon-shunxubofang" style={{fontSize:'0.6rem',color:'#fff'}}></i>
 				<i onClick={this.prevSong.bind(this)} className="iconfont icon-prev" style={{fontSize:'0.6rem',color:'#fff'}}></i>
-				<i onClick={this.paused.bind(this,false)} className={"iconfont "+play_button} style={{fontSize:'0.8rem',color:'#fff'}}></i>
+				<i onClick={this.paused.bind(this)} className={"iconfont "+play_button} style={{fontSize:'0.8rem',color:'#fff'}}></i>
 				<i onClick={this.nextSong.bind(this)} className="iconfont icon-next" style={{fontSize:'0.6rem',color:'#fff'}}></i>
 				<i onClick={this.showList.bind(this)} className="iconfont icon-bofangliebiaoicon" style={{fontSize:'0.6rem',color:'#fff'}}></i>
 			</div>

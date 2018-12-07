@@ -33,7 +33,7 @@ class Love extends Component{
         this.props.actions.add_song(play_list);
         this.props.actions.music_get_hash(data.hash);
         this.props.actions.music_control(true);
-        location.href='#/play/'+data.hash;
+        this.props.history.push('/play/'+data.hash);
     }
     delete(i){
         let collections=this.state.collections;

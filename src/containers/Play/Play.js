@@ -15,7 +15,8 @@ export default connect(
   			audio:state.Music.audio,
   			currentMusic:state.Music.currentMusic,
   			progress:state.Music.progress,
-        play:state.Music.play,
+        playing:state.Music.playing,
+        hash:state.Music.hash
   		}
   	},
     (dispatch)=>({
