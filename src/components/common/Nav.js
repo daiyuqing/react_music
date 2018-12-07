@@ -17,7 +17,7 @@ class Nav extends Component{
 			        	<Recommend/>
 			        </Tabs.Pane>
 			        <Tabs.Pane label="新歌" name="2">
-			        	<New/>
+			        	<New history={this.props.history}/>
 			        </Tabs.Pane>
 			        <Tabs.Pane label="排行榜" name="3">
 			        	<Rank/>
