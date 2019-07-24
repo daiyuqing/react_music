@@ -1,4 +1,4 @@
-const CleanWebpackPlugin=require('clean-webpack-plugin');
+const {CleanWebpackPlugin}=require('clean-webpack-plugin');
 const merge = require('webpack-merge');
 const baseWebpackConfig=require('./webpack.base.config.js');
 const MiniCssExtractPlugin = require("mini-css-extract-plugin");
@@ -16,7 +16,7 @@ const config=merge(baseWebpackConfig,{
     ]
   },
     plugins:[
-        new CleanWebpackPlugin(['build']),
+        new CleanWebpackPlugin(),
         new MiniCssExtractPlugin({
             filename: "css/[name].[chunkhash:8].css",
             chunkFilename: "css/[id].css"
